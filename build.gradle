@@ -67,7 +67,7 @@ minecraft {
             // The markers can be added/remove as needed separated by commas.
             // "SCAN": For mods scan.
             // "REGISTRIES": For firing of registry events.
-            // "REGISTRYDUMP": For getting the contents of all registries.
+            // "REGISTRYDUMP": For getting the contents of all registry.
             property 'forge.logging.markers', 'REGISTRIES'
 
             // Recommended logging level for the console

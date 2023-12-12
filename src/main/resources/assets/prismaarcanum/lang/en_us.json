@@ -1,0 +1,15 @@
+{
+  "item.prismaarcanum.raw_ignis": "Ignis Quartz",
+  "item.prismaarcanum.raw_aqua": "Aqua Cascade",
+  "item.prismaarcanum.raw_terra": "Terra Geode",
+  "item.prismaarcanum.raw_ventus": "Ventus Eye",
+  "item.prismaarcanum.raw_fulgur": "Fulgur Globe",
+  "item.prismaarcanum.raw_gelum": "Gelum Lattice",
+  "item.prismaarcanum.raw_lux": "Lux Brilliance",
+  "item.prismaarcanum.raw_nox": "Nox Singularity",
+
+  "item.prismaarcanum.ignis_wand": "Ignis Wand",
+
+
+  "creativetab.prismaarcanum_creative_tab":"Prisma Arcanum: Items"
+}
