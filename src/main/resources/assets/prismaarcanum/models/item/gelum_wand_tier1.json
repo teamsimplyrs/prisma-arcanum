@@ -1,0 +1,7 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "prismaarcanum:item/wand_tier1",
+    "layer1": "prismaarcanum:item/wand_core"
+  }
+}

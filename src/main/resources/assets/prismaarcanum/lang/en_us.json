@@ -1,14 +1,25 @@
 {
-  "item.prismaarcanum.raw_ignis": "Ignis Quartz",
+  "item.prismaarcanum.raw_ignis": "Ignis Therm",
   "item.prismaarcanum.raw_aqua": "Aqua Cascade",
   "item.prismaarcanum.raw_terra": "Terra Geode",
-  "item.prismaarcanum.raw_ventus": "Ventus Eye",
+  "item.prismaarcanum.raw_ventus": "Ventus Gale",
   "item.prismaarcanum.raw_fulgur": "Fulgur Globe",
   "item.prismaarcanum.raw_gelum": "Gelum Lattice",
   "item.prismaarcanum.raw_lux": "Lux Brilliance",
   "item.prismaarcanum.raw_nox": "Nox Singularity",
 
-  "item.prismaarcanum.ignis_wand": "Ignis Wand",
+  "item.prismaarcanum.ignis_wand_tier1": "Rookie Ignis Wand",
+  "item.prismaarcanum.aqua_wand_tier1": "Rookie Aqua Wand",
+  "item.prismaarcanum.fulgur_wand_tier1": "Rookie Fulgur Wand",
+  "item.prismaarcanum.terra_wand_tier1": "Rookie Terra Wand",
+  "item.prismaarcanum.gelum_wand_tier1": "Rookie Gelum Wand",
+  "item.prismaarcanum.ventus_wand_tier1": "Rookie Ventus Wand",
+  "item.prismaarcanum.natura_wand_tier1": "Rookie Natura Wand",
+  "item.prismaarcanum.lux_wand_tier1": "Rookie Lux Wand",
+  "item.prismaarcanum.nox_wand_tier1": "Rookie Nox Wand",
+
+
+  "block.prismaarcanum.spell_nexus": "Spell Nexus",
 
 
   "creativetab.prismaarcanum_creative_tab":"Prisma Arcanum: Items"

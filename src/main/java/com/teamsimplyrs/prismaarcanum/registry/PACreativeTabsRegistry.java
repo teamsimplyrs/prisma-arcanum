@@ -19,7 +19,17 @@ public class PACreativeTabsRegistry {
                     .title(Component.translatable("creativetab.prismaarcanum_creative_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(PAItemRegistry.RAW_IGNIS.get());
+                        output.accept(PAItemRegistry.RAW_VENTUS.get());
                         output.accept(PAItemRegistry.IGNIS_WAND.get());
+                        output.accept((PAItemRegistry.AQUA_WAND.get()));
+                        output.accept((PAItemRegistry.TERRA_WAND.get()));
+                        output.accept((PAItemRegistry.FULGUR_WAND.get()));
+                        output.accept((PAItemRegistry.GELUM_WAND.get()));
+                        output.accept((PAItemRegistry.VENTUS_WAND.get()));
+                        output.accept((PAItemRegistry.NATURA_WAND.get()));
+                        output.accept((PAItemRegistry.LUX_WAND.get()));
+                        output.accept((PAItemRegistry.NOX_WAND.get()));
+                        output.accept(PABlockRegistry.SPELL_NEXUS.get());
                     })
                     .build());
 

@@ -1,6 +1,8 @@
 package com.teamsimplyrs.prismaarcanum;
 
 import com.mojang.logging.LogUtils;
+import com.teamsimplyrs.prismaarcanum.events.WandColorHandler;
+import com.teamsimplyrs.prismaarcanum.registry.PABlockEntityRegistry;
 import com.teamsimplyrs.prismaarcanum.registry.PABlockRegistry;
 import com.teamsimplyrs.prismaarcanum.registry.PACreativeTabsRegistry;
 import com.teamsimplyrs.prismaarcanum.registry.PAItemRegistry;
@@ -35,13 +37,15 @@ public class PrismaArcanum
         PACreativeTabsRegistry.register(modEventBus);
         PAItemRegistry.register(modEventBus);
         PABlockRegistry.register(modEventBus);
-
+        PABlockEntityRegistry.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
-        MinecraftForge.EVENT_BUS.register(this);
-
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
+
+        MinecraftForge.EVENT_BUS.register(this);
+
+        modEventBus.register(WandColorHandler.class);
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);

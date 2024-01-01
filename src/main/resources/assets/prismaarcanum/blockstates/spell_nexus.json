@@ -1,0 +1,9 @@
+{
+  "variants":
+  {
+    "":
+    {
+      "model": "prismaarcanum:block/spell_nexus"
+    }
+  }
+}
