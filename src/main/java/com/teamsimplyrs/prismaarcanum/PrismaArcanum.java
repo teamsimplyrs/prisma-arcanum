@@ -6,6 +6,10 @@ import com.teamsimplyrs.prismaarcanum.registry.PABlockEntityRegistry;
 import com.teamsimplyrs.prismaarcanum.registry.PABlockRegistry;
 import com.teamsimplyrs.prismaarcanum.registry.PACreativeTabsRegistry;
 import com.teamsimplyrs.prismaarcanum.registry.PAItemRegistry;
+import com.teamsimplyrs.prismaarcanum.screen.PAMenuTypes;
+import com.teamsimplyrs.prismaarcanum.screen.SpellNexusMenu;
+import com.teamsimplyrs.prismaarcanum.screen.SpellNexusScreen;
+import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,6 +42,7 @@ public class PrismaArcanum
         PAItemRegistry.register(modEventBus);
         PABlockRegistry.register(modEventBus);
         PABlockEntityRegistry.register(modEventBus);
+        PAMenuTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         // Register the item to a creative tab
@@ -80,7 +85,7 @@ public class PrismaArcanum
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-
+            MenuScreens.register(PAMenuTypes.SPELL_NEXUS_MENU.get(), SpellNexusScreen::new);
         }
     }
 }

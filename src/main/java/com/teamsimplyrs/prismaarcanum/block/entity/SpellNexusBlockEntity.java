@@ -1,6 +1,7 @@
 package com.teamsimplyrs.prismaarcanum.block.entity;
 
 import com.teamsimplyrs.prismaarcanum.registry.PABlockEntityRegistry;
+import com.teamsimplyrs.prismaarcanum.screen.SpellNexusMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -89,7 +90,7 @@ public class SpellNexusBlockEntity extends BlockEntity implements MenuProvider {
     @Override
     public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
     {
-        return null;
+        return new SpellNexusMenu(i, inventory, this, this.data);
     }
 
     @Override
