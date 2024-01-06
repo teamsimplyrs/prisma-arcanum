@@ -116,8 +116,11 @@ public class SpellNexusBlockEntity extends BlockEntity implements MenuProvider {
         Containers.dropContents(this.level, this.worldPosition, inventory);
     }
 
-    public void tick(Level pLevel1, BlockPos pPos, BlockState pState1) {
+    public void tick(Level pLevel, BlockPos pPos, BlockState pState1) {
 
 
     }
+
+
+
 }

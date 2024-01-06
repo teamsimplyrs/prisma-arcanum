@@ -1,25 +1,35 @@
 package com.teamsimplyrs.prismaarcanum.screen;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.logging.LogUtils;
 import com.teamsimplyrs.prismaarcanum.PrismaArcanum;
+import com.teamsimplyrs.prismaarcanum.item.wands.AbstractWand;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
+import org.slf4j.Logger;
 
 public class SpellNexusScreen extends AbstractContainerScreen<SpellNexusMenu> {
 
+    private static final Logger LOGGER = LogUtils.getLogger();
+
     private static final ResourceLocation MENU_TEXTURE = new ResourceLocation(PrismaArcanum.MODID, "textures/gui/spell_nexus_gui.png");
+    private static final ResourceLocation MENU_SPELL_SLOT_TEXTURE = new ResourceLocation(PrismaArcanum.MODID, "textures/gui/spell_nexus_spell_slot.png");
+    private static SpellNexusMenu menu;
     public SpellNexusScreen(SpellNexusMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
+        this.menu = pMenu;
     }
 
     @Override
     protected void init() {
         super.init();
         this.inventoryLabelY = 30000;
+//        this.titleLabelX = (width - this.imageWidth)/2;
+        this.titleLabelY = 90;
     }
 
     @Override
@@ -34,7 +44,10 @@ public class SpellNexusScreen extends AbstractContainerScreen<SpellNexusMenu> {
 
         guiGraphics.blit(MENU_TEXTURE, x, y, 0, 0, imageWidth, imageHeight+60);
 
-        renderProgressBar(guiGraphics, x, y);
+        if (menu.getWandInSlot().getItem() instanceof AbstractWand)
+        {
+            guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, 0, 0, 0, 0, 32, 32);
+        }
     }
 
     private void renderProgressBar(GuiGraphics guiGraphics, int x, int y)

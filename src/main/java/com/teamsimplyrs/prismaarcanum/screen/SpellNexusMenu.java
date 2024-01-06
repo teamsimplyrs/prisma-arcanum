@@ -1,17 +1,22 @@
 package com.teamsimplyrs.prismaarcanum.screen;
 
+import com.mojang.logging.LogUtils;
 import com.teamsimplyrs.prismaarcanum.block.entity.SpellNexusBlockEntity;
+import com.teamsimplyrs.prismaarcanum.screen.slot.WandSlot;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
 
 public class SpellNexusMenu extends AbstractContainerMenu {
 
@@ -19,6 +24,7 @@ public class SpellNexusMenu extends AbstractContainerMenu {
     private final Level level;
     private final ContainerData data;
 
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     protected SpellNexusMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
         this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(2));
@@ -33,12 +39,14 @@ public class SpellNexusMenu extends AbstractContainerMenu {
         this.level = inv.player.level();
         this.data = data;
 
+
+
+        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
+            this.addSlot(new WandSlot(iItemHandler, 0, 80, 40));
+        });
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
 
-        this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            this.addSlot(new SlotItemHandler(iItemHandler, 0, 80, 40));
-        });
 
         addDataSlots(data);
     }
@@ -112,4 +120,17 @@ public class SpellNexusMenu extends AbstractContainerMenu {
             this.addSlot(new Slot(pPlayerInv, i, 8 + i*18, 172));
         }
     }
+
+    @Override
+    public void slotsChanged(Container pContainer) {
+
+        LOGGER.info("slot changes");
+        super.slotsChanged(pContainer);
+    }
+
+    public ItemStack getWandInSlot()
+    {
+        return this.slots.get(0).getItem();
+    }
+
 }
