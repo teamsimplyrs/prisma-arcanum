@@ -27,10 +27,12 @@ public class SpellNexusScreen extends AbstractContainerScreen<SpellNexusMenu> {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, MENU_TEXTURE);
+//        this.imageHeight = 256;
+//        this.imageWidth = 256;
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(MENU_TEXTURE, x, y, 0, 0, imageWidth, imageHeight);
+        guiGraphics.blit(MENU_TEXTURE, x, y, 0, 0, imageWidth, imageHeight+60);
 
         renderProgressBar(guiGraphics, x, y);
     }
