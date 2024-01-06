@@ -2,12 +2,15 @@ package com.teamsimplyrs.prismaarcanum.item.wands;
 
 import com.teamsimplyrs.prismaarcanum.item.interfaces.ICastingItem;
 import com.teamsimplyrs.prismaarcanum.item.spells.SpellBase;
+import com.teamsimplyrs.prismaarcanum.particle.PAParticles;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -86,5 +89,32 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
     @Override
     public boolean cast(ItemStack stack, SpellBase spell, Player caster) {
         return false;
+    }
+
+
+    @Override
+    public InteractionResult useOn(UseOnContext pContext) {
+        if (pContext.getLevel().isClientSide)
+        {
+            BlockPos posClicked = pContext.getClickedPos();
+            Player player = pContext.getPlayer();
+
+            spawnIgnisParticles(pContext, posClicked);
+        }
+        return super.useOn(pContext);
+    }
+
+    private void spawnIgnisParticles(UseOnContext pContext, BlockPos posClicked)
+    {
+        for (int i = 0; i < 360; i++)
+        {
+            if (i%20 == 0)
+            {
+                pContext.getLevel().addParticle(PAParticles.IGNIS_PARTICLES.get(),
+                        posClicked.getX() + 0.5f, posClicked.getY() + 1, posClicked.getZ() + 0.5f,
+                        Math.cos(i) + 0.25f, 0.15f, Math.sin(i)*0.25f
+                        );
+            }
+        }
     }
 }

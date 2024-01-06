@@ -2,6 +2,7 @@ package com.teamsimplyrs.prismaarcanum;
 
 import com.mojang.logging.LogUtils;
 import com.teamsimplyrs.prismaarcanum.events.WandColorHandler;
+import com.teamsimplyrs.prismaarcanum.particle.PAParticles;
 import com.teamsimplyrs.prismaarcanum.registry.PABlockEntityRegistry;
 import com.teamsimplyrs.prismaarcanum.registry.PABlockRegistry;
 import com.teamsimplyrs.prismaarcanum.registry.PACreativeTabsRegistry;
@@ -43,6 +44,7 @@ public class PrismaArcanum
         PABlockRegistry.register(modEventBus);
         PABlockEntityRegistry.register(modEventBus);
         PAMenuTypes.register(modEventBus);
+        PAParticles.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         // Register the item to a creative tab
