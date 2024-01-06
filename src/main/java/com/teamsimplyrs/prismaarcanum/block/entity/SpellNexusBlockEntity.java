@@ -116,7 +116,7 @@ public class SpellNexusBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void tick(Level pLevel1, BlockPos pPos, BlockState pState1) {
-        
+
 
     }
 }

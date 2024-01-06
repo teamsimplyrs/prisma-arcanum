@@ -30,6 +30,16 @@ public class PACreativeTabsRegistry {
                         output.accept((PAItemRegistry.LUX_WAND.get()));
                         output.accept((PAItemRegistry.NOX_WAND.get()));
                         output.accept(PABlockRegistry.SPELL_NEXUS.get());
+
+                        output.accept(PAItemRegistry.IGNIS_SPELL_HOLOGRAM.get());
+                        output.accept(PAItemRegistry.AQUA_SPELL_HOLOGRAM.get());
+                        output.accept(PAItemRegistry.TERRA_SPELL_HOLOGRAM.get());
+                        output.accept(PAItemRegistry.FULGUR_SPELL_HOLOGRAM.get());
+                        output.accept(PAItemRegistry.GELUM_SPELL_HOLOGRAM.get());
+                        output.accept(PAItemRegistry.VENTUS_SPELL_HOLOGRAM.get());
+                        output.accept(PAItemRegistry.NATURA_SPELL_HOLOGRAM.get());
+                        output.accept(PAItemRegistry.LUX_SPELL_HOLOGRAM.get());
+                        output.accept(PAItemRegistry.NOX_SPELL_HOLOGRAM.get());
                     })
                     .build());
 
