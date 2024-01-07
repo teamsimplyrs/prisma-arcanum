@@ -2,20 +2,20 @@ package com.teamsimplyrs.prismaarcanum.screen;
 
 import com.mojang.logging.LogUtils;
 import com.teamsimplyrs.prismaarcanum.block.entity.SpellNexusBlockEntity;
+import com.teamsimplyrs.prismaarcanum.screen.slot.SpellHologramSlot;
 import com.teamsimplyrs.prismaarcanum.screen.slot.WandSlot;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.*;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ContainerData;
+import net.minecraft.world.inventory.SimpleContainerData;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
-import net.minecraftforge.items.SlotItemHandler;
-import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 public class SpellNexusMenu extends AbstractContainerMenu {
@@ -43,6 +43,10 @@ public class SpellNexusMenu extends AbstractContainerMenu {
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new WandSlot(iItemHandler, 0, 80, 40));
+            this.addSlot(new SpellHologramSlot(iItemHandler, 1, 80-48, 40));
+            this.addSlot(new SpellHologramSlot(iItemHandler, 2, 80+48, 40));
+            this.addSlot(new SpellHologramSlot(iItemHandler, 3, 80, 40-48));
+            this.addSlot(new SpellHologramSlot(iItemHandler, 4, 80, 40+48));
         });
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
