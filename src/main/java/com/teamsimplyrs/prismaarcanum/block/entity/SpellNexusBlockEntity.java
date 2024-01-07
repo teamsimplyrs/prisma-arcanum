@@ -33,7 +33,7 @@ public class SpellNexusBlockEntity extends BlockEntity implements MenuProvider {
 
     private static final Logger LOGGER = LogManager.getLogger();
     public static final String BE_NAME = "spell_nexus_be";
-    private final ItemStackHandler itemHandler = new ItemStackHandler(6) {
+    private final ItemStackHandler itemHandler = new ItemStackHandler(5) {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             if(slot==0){

@@ -2,6 +2,7 @@ package com.teamsimplyrs.prismaarcanum.screen.slot;
 
 import com.mojang.logging.LogUtils;
 import com.teamsimplyrs.prismaarcanum.item.spells.spellholograms.AbstractSpellHolgram;
+import com.teamsimplyrs.prismaarcanum.item.wands.AbstractWand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -16,7 +17,11 @@ public class SpellHologramSlot extends SlotItemHandler {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        LOGGER.info(stack.getItem().toString() + " " + (stack.getItem() instanceof AbstractSpellHolgram));
         return (stack.getItem() instanceof AbstractSpellHolgram);
+    }
+
+    @Override
+    public boolean isHighlightable() {
+        return this.getItemHandler().getStackInSlot(0).getItem() instanceof AbstractWand;
     }
 }
