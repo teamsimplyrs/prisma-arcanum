@@ -43,10 +43,10 @@ public class SpellNexusMenu extends AbstractContainerMenu {
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
             this.addSlot(new WandSlot(iItemHandler, 0, 80, 40));
-            this.addSlot(new SpellHologramSlot(iItemHandler, 1, 80, 40-48));
-            this.addSlot(new SpellHologramSlot(iItemHandler, 2, 80+48, 40));
-            this.addSlot(new SpellHologramSlot(iItemHandler, 3, 80, 40+48));
-            this.addSlot(new SpellHologramSlot(iItemHandler, 4, 80-48, 40));
+            this.addSlot(new SpellHologramSlot(iItemHandler, 1, 80, 40-46));
+            this.addSlot(new SpellHologramSlot(iItemHandler, 2, 80+48, 43));
+            this.addSlot(new SpellHologramSlot(iItemHandler, 3, 80, 40+51));
+            this.addSlot(new SpellHologramSlot(iItemHandler, 4, 80-48, 43));
         });
         addPlayerInventory(inv);
         addPlayerHotbar(inv);
