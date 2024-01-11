@@ -8,7 +8,6 @@ import com.teamsimplyrs.prismaarcanum.registry.PABlockRegistry;
 import com.teamsimplyrs.prismaarcanum.registry.PACreativeTabsRegistry;
 import com.teamsimplyrs.prismaarcanum.registry.PAItemRegistry;
 import com.teamsimplyrs.prismaarcanum.screen.PAMenuTypes;
-import com.teamsimplyrs.prismaarcanum.screen.SpellNexusMenu;
 import com.teamsimplyrs.prismaarcanum.screen.SpellNexusScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.CreativeModeTabs;
