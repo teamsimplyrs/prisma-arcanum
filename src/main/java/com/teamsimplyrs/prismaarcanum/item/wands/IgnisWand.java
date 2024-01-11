@@ -1,5 +1,6 @@
 package com.teamsimplyrs.prismaarcanum.item.wands;
 
+import com.teamsimplyrs.prismaarcanum.entity.projectile.FireballProjectile;
 import com.teamsimplyrs.prismaarcanum.item.interfaces.ICastingItem;
 import com.teamsimplyrs.prismaarcanum.item.spells.SpellBase;
 import com.teamsimplyrs.prismaarcanum.particle.PAParticles;
@@ -8,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -91,6 +93,23 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
         return false;
     }
 
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
+
+        if (!pLevel.isClientSide)
+        {
+            FireballProjectile fireballProjectile = new FireballProjectile(pPlayer, pLevel);
+            fireballProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0F, 1F, 1F);
+            pLevel.addFreshEntity(fireballProjectile);
+        }
+
+        pPlayer.awardStat(Stats.ITEM_USED.get(this));
+
+
+        return InteractionResultHolder.sidedSuccess(itemStack, pLevel.isClientSide());
+    }
 
     @Override
     public InteractionResult useOn(UseOnContext pContext) {
