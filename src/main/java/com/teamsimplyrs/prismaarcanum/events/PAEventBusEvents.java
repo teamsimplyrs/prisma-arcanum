@@ -2,6 +2,8 @@ package com.teamsimplyrs.prismaarcanum.events;
 
 import com.teamsimplyrs.prismaarcanum.PrismaArcanum;
 import com.teamsimplyrs.prismaarcanum.block.entity.renderer.SpellNexusBlockEntityRenderer;
+import com.teamsimplyrs.prismaarcanum.entity.client.PAModelLayers;
+import com.teamsimplyrs.prismaarcanum.entity.client.model.FireballProjectileModel;
 import com.teamsimplyrs.prismaarcanum.particle.PAParticles;
 import com.teamsimplyrs.prismaarcanum.particle.custom.IgnisParticles;
 import com.teamsimplyrs.prismaarcanum.registry.PABlockEntityRegistry;
@@ -23,5 +25,11 @@ public class PAEventBusEvents {
     public static void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
         event.registerBlockEntityRenderer(PABlockEntityRegistry.SPELL_NEXUS_BE.get(), SpellNexusBlockEntityRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void registerLayer(EntityRenderersEvent.RegisterLayerDefinitions event)
+    {
+        event.registerLayerDefinition(PAModelLayers.FIREBALL_PROJECTILE_LAYER, FireballProjectileModel::createBodyLayer);
     }
 }
