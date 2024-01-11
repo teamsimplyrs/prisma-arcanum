@@ -17,6 +17,7 @@ public class FireballProjectile extends ThrowableItemProjectile {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public static final AnimationState FIREBALL_ANIM_STATE = new AnimationState();
+    private int animationTimeout = 0;
 
 
     public FireballProjectile(EntityType<? extends ThrowableItemProjectile> pEntityType, Level pLevel) {
@@ -50,7 +51,7 @@ public class FireballProjectile extends ThrowableItemProjectile {
     public void tick() {
         super.tick();
 
-        if (this.level().isClientSide)
+        if (this.level().isClientSide())
         {
             setupAnimationStates();
         }
@@ -58,6 +59,12 @@ public class FireballProjectile extends ThrowableItemProjectile {
 
     private void setupAnimationStates()
     {
-        this.FIREBALL_ANIM_STATE.start(this.tickCount);
+        if (this.animationTimeout <= 0)
+        {
+            this.animationTimeout = this.random.nextInt(40)+80;
+            FIREBALL_ANIM_STATE.start(this.tickCount);
+        } else {
+            animationTimeout--;
+        }
     }
 }
