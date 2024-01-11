@@ -1,15 +1,14 @@
 package com.teamsimplyrs.prismaarcanum;
 
 import com.mojang.logging.LogUtils;
+import com.teamsimplyrs.prismaarcanum.entity.client.renderer.FireballProjectileRenderer;
 import com.teamsimplyrs.prismaarcanum.events.WandColorHandler;
 import com.teamsimplyrs.prismaarcanum.particle.PAParticles;
-import com.teamsimplyrs.prismaarcanum.registry.PABlockEntityRegistry;
-import com.teamsimplyrs.prismaarcanum.registry.PABlockRegistry;
-import com.teamsimplyrs.prismaarcanum.registry.PACreativeTabsRegistry;
-import com.teamsimplyrs.prismaarcanum.registry.PAItemRegistry;
+import com.teamsimplyrs.prismaarcanum.registry.*;
 import com.teamsimplyrs.prismaarcanum.screen.PAMenuTypes;
 import com.teamsimplyrs.prismaarcanum.screen.SpellNexusScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -87,6 +86,7 @@ public class PrismaArcanum
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             MenuScreens.register(PAMenuTypes.SPELL_NEXUS_MENU.get(), SpellNexusScreen::new);
+            EntityRenderers.register(PAEntities.FIREBALL_PROJECTILE.get(), FireballProjectileRenderer::new);
         }
     }
 }
