@@ -11,12 +11,13 @@ public class IgnisParticles extends TextureSheetParticle {
     protected IgnisParticles(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, SpriteSet spriteSet) {
         super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
 
-        this.friction = 0.8f;
+        this.friction = 1f;
         this.xd = pXSpeed;
         this.yd = pYSpeed;
         this.zd = pZSpeed;
         this.quadSize *= 0.85f;
         this.lifetime = 60;
+        this.hasPhysics = false;
         this.setSpriteFromAge(spriteSet);
 
         this.rCol = 1f;
