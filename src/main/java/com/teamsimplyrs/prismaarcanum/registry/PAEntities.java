@@ -15,7 +15,7 @@ public class PAEntities {
 
     public static final RegistryObject<EntityType<FireballProjectile>> FIREBALL_PROJECTILE =
             ENTITY_TYPES.register("fireball_projectile", () -> EntityType.Builder.<FireballProjectile>of(FireballProjectile::new, MobCategory.MISC)
-                    .sized(1f, 1f).build("fireball_projectile"));
+                    .sized(1f, 1f).clientTrackingRange(4).updateInterval(10).build("fireball_projectile"));
 
 
     public static void register(IEventBus eventBus)

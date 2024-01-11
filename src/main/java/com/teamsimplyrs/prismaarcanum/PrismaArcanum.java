@@ -6,7 +6,6 @@ import com.teamsimplyrs.prismaarcanum.events.WandColorHandler;
 import com.teamsimplyrs.prismaarcanum.particle.PAParticles;
 import com.teamsimplyrs.prismaarcanum.registry.*;
 import com.teamsimplyrs.prismaarcanum.screen.PAMenuTypes;
-import com.teamsimplyrs.prismaarcanum.screen.SpellNexusMenu;
 import com.teamsimplyrs.prismaarcanum.screen.SpellNexusScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -44,6 +43,7 @@ public class PrismaArcanum
         PABlockEntityRegistry.register(modEventBus);
         PAMenuTypes.register(modEventBus);
         PAParticles.register(modEventBus);
+        PAEntities.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         // Register the item to a creative tab
