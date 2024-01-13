@@ -3,7 +3,6 @@ package com.teamsimplyrs.prismaarcanum.particle.custom;
 import com.teamsimplyrs.prismaarcanum.particle.particleOptions.IgnisParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -12,9 +11,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class IgnisParticles extends TextureSheetParticle {
 
-    private final BlockPos target;
+    private final Vec3 target;
 
-    protected IgnisParticles(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, BlockPos pTarget, int pLifetime , SpriteSet spriteSet) {
+    protected IgnisParticles(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, Vec3 pTarget, int pLifetime , SpriteSet spriteSet) {
         super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
 
         this.friction = 1f;
@@ -42,7 +41,7 @@ public class IgnisParticles extends TextureSheetParticle {
         if (this.age++ >= this.lifetime) {
             this.remove();
         } else {
-            Vec3 destination = this.target.getCenter();
+            Vec3 destination = this.target;
 
                 int i = this.lifetime - this.age;
                 double d0 = 1.0D / (double)i;
