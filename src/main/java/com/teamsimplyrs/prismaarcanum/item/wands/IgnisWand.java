@@ -3,7 +3,6 @@ package com.teamsimplyrs.prismaarcanum.item.wands;
 import com.teamsimplyrs.prismaarcanum.entity.projectile.FireballProjectile;
 import com.teamsimplyrs.prismaarcanum.item.interfaces.ICastingItem;
 import com.teamsimplyrs.prismaarcanum.item.spells.SpellBase;
-import com.teamsimplyrs.prismaarcanum.particle.PAParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -136,10 +135,10 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
         {
             if (i%20 == 0)
             {
-                pContext.getLevel().addParticle(PAParticles.IGNIS_PARTICLES.get(),
-                        posClicked.getX() + 0.5f, posClicked.getY() + 1, posClicked.getZ() + 0.5f,
-                        Math.cos(i) + 0.25f, 0.15f, Math.sin(i)*0.25f
-                        );
+//                pContext.getLevel().addParticle(PAParticles.IGNIS_PARTICLES.get(),
+//                        posClicked.getX() + 0.5f, posClicked.getY() + 1, posClicked.getZ() + 0.5f,
+//                        Math.cos(i) + 0.25f, 0.15f, Math.sin(i)*0.25f
+//                        );
             }
         }
     }

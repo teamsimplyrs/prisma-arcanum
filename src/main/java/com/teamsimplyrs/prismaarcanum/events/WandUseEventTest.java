@@ -2,8 +2,8 @@ package com.teamsimplyrs.prismaarcanum.events;
 
 import com.teamsimplyrs.prismaarcanum.PrismaArcanum;
 import com.teamsimplyrs.prismaarcanum.item.wands.IgnisWand;
-import com.teamsimplyrs.prismaarcanum.particle.PAParticles;
-import net.minecraft.sounds.SoundEvents;
+import com.teamsimplyrs.prismaarcanum.particle.particleOptions.IgnisParticleOptions;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -41,10 +41,10 @@ public class WandUseEventTest {
                     double velocityY = (spawnLocation.y - y) * 0.1;
                     double velocityZ = (spawnLocation.z - z) * 0.1;
 
-                    event.player.level().addParticle(PAParticles.IGNIS_PARTICLES.get(), x, y, z, velocityX, velocityY, velocityZ);
+                    event.player.level().addParticle(new IgnisParticleOptions(new BlockPos((int) spawnLocation.x, (int) spawnLocation.y, (int) spawnLocation.z),20), x, y, z, velocityX, velocityY, velocityZ);
                 }
 
-                event.player.playSound(SoundEvents.FIRECHARGE_USE);
+                //event.player.playSound(SoundEvents.FIRECHARGE_USE);
             }
         }
 
@@ -67,9 +67,9 @@ public class WandUseEventTest {
     public static void wandUseStop(LivingEntityUseItemEvent.Stop event)
     {
         Vec3 spawnlocation = event.getEntity().getEyePosition().add(event.getEntity().getLookAngle().multiply(1, 1, 1));
-        event.getEntity().level().addParticle(PAParticles.IGNIS_PARTICLES.get(),
-                spawnlocation.x, spawnlocation.y, spawnlocation.z,
-                event.getEntity().getLookAngle().x*1, event.getEntity().getLookAngle().y*1, event.getEntity().getLookAngle().z*1
-        );
+//        event.getEntity().level().addParticle(PAParticles.IGNIS_PARTICLES.get(),
+//                spawnlocation.x, spawnlocation.y, spawnlocation.z,
+//                event.getEntity().getLookAngle().x*1, event.getEntity().getLookAngle().y*1, event.getEntity().getLookAngle().z*1
+//        );
     }
 }

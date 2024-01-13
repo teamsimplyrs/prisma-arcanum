@@ -1,14 +1,20 @@
 package com.teamsimplyrs.prismaarcanum.particle.custom;
 
+import com.teamsimplyrs.prismaarcanum.particle.particleOptions.IgnisParticleOptions;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
-import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.core.BlockPos;
+import net.minecraft.util.Mth;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
 public class IgnisParticles extends TextureSheetParticle {
-    protected IgnisParticles(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, SpriteSet spriteSet) {
+
+    private final BlockPos target;
+
+    protected IgnisParticles(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, BlockPos pTarget, int pLifetime , SpriteSet spriteSet) {
         super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
 
         this.friction = 1f;
@@ -23,11 +29,28 @@ public class IgnisParticles extends TextureSheetParticle {
         this.rCol = 1f;
         this.gCol = 1f;
         this.bCol = 1f;
+
+        this.target = pTarget;
+        this.lifetime = pLifetime;
     }
 
     @Override
     public void tick() {
-        super.tick();
+        this.xo = this.x;
+        this.yo = this.y;
+        this.zo = this.z;
+        if (this.age++ >= this.lifetime) {
+            this.remove();
+        } else {
+            Vec3 destination = this.target.getCenter();
+
+                int i = this.lifetime - this.age;
+                double d0 = 1.0D / (double)i;
+                this.x = Mth.lerp(d0, this.x, destination.x());
+                this.y = Mth.lerp(d0, this.y, destination.y());
+                this.z = Mth.lerp(d0, this.z, destination.z());
+                this.setPos(this.x, this.y, this.z); // FORGE: Update the particle's bounding box
+         }
         particleFadeOut();
     }
 
@@ -43,7 +66,7 @@ public class IgnisParticles extends TextureSheetParticle {
 
 
     @OnlyIn(Dist.CLIENT)
-    public static class Provider implements ParticleProvider<SimpleParticleType>
+    public static class Provider implements ParticleProvider<IgnisParticleOptions>
     {
         private final SpriteSet sprites;
 
@@ -54,8 +77,8 @@ public class IgnisParticles extends TextureSheetParticle {
 
         @Nullable
         @Override
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xd, double yd, double zd) {
-            return new IgnisParticles(clientLevel, x, y, z, xd, yd, zd, sprites);
+        public Particle createParticle(IgnisParticleOptions options, ClientLevel clientLevel, double x, double y, double z, double xd, double yd, double zd) {
+            return new IgnisParticles(clientLevel, x, y, z, xd, yd, zd,options.getDestination(),options.getArrivalInTicks(), sprites);
         }
     }
 }

@@ -5,12 +5,11 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.teamsimplyrs.prismaarcanum.entity.animations.PAAnimationDefinitions;
 import com.teamsimplyrs.prismaarcanum.entity.projectile.FireballProjectile;
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HierarchicalModel;
+import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.client.model.geom.ModelPart;
 
 public class FireballProjectileModel<T extends Entity> extends HierarchicalModel<T> {
 
@@ -42,8 +41,8 @@ public class FireballProjectileModel<T extends Entity> extends HierarchicalModel
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-//		this.root().getAllParts().forEach(ModelPart::resetPose);
-		this.animate(FireballProjectile.FIREBALL_ANIM_STATE, PAAnimationDefinitions.FIREBALL_PROJECTILE_ANIMATION, ageInTicks);
+		this.root().getAllParts().forEach(ModelPart::resetPose);
+		this.animate(FireballProjectile.FIREBALL_ANIM_STATE, PAAnimationDefinitions.FIREBALL_PROJECTILE_ANIMATION, ageInTicks,100f);
 	}
 
 	@Override
