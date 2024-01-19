@@ -92,6 +92,14 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
 
+//        if (!pLevel.isClientSide)
+//        {
+//            FireballProjectile fireballProjectile = new FireballProjectile(pPlayer, pLevel);
+//            fireballProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0f, 0.6F, 1F);
+//            pLevel.addFreshEntity(fireballProjectile);
+//        }
+
+        pPlayer.awardStat(Stats.ITEM_USED.get(this));
 
         isBeingUsed = true;
         pPlayer.startUsingItem(pUsedHand);

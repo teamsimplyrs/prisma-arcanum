@@ -1,6 +1,7 @@
 package com.teamsimplyrs.prismaarcanum.entity.projectile;
 
 import com.mojang.logging.LogUtils;
+import com.teamsimplyrs.prismaarcanum.particle.PAParticles;
 import com.teamsimplyrs.prismaarcanum.particle.particleOptions.IgnisParticleOptions;
 import com.teamsimplyrs.prismaarcanum.registry.PAEntities;
 import net.minecraft.world.entity.AnimationState;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import org.slf4j.Logger;
 
@@ -50,6 +52,16 @@ public class FireballProjectile extends ThrowableItemProjectile {
     }
 
     @Override
+    protected void onHitEntity(EntityHitResult pResult) {
+        if (!this.level().isClientSide)
+        {
+            this.level().broadcastEntityEvent(this, (byte) 3);
+            this.level().broadcastDamageEvent(pResult.getEntity(), damageSources().onFire());
+            pResult.getEntity().hurt(damageSources().onFire(), 4f);
+        }
+    }
+
+    @Override
     public void tick() {
         super.tick();
 
@@ -60,18 +72,22 @@ public class FireballProjectile extends ThrowableItemProjectile {
         if (this.level().isClientSide())
         {
             setupAnimationStates();
+            summonSpellParticles((float) this.position().x, (float) this.position().y, (float) this.position().z);
         }
     }
 
     private void setupAnimationStates()
     {
-        if (this.animationTimeout <= 0)
-        {
-            this.animationTimeout = this.random.nextInt(40)+80;
-            FIREBALL_ANIM_STATE.start(this.tickCount);
-        } else {
-            animationTimeout--;
-        }
+//        FIREBALL_ANIM_STATE.start(this.tickCount);
+//        FIREBALL_ANIM_STATE.animateWhen(true, this.tickCount);
+    }
+
+    private void summonSpellParticles(float posX, float posY, float posZ)
+    {
+        Vec3 position = new Vec3(posX,posY,posZ);
+        this.level().addParticle(new IgnisParticleOptions(position,20),
+                posX, posY, posZ, 1f, 1f, 1f
+                );
     }
 
     private void makeParticle(int pParticleAmount) {
