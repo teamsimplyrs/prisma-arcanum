@@ -23,25 +23,31 @@ public class WandUseEventTest {
             if (wand.isBeingUsed()) {
                 Vec3 lookVector = event.player.getLookAngle();
 
-                // Calculate a perpendicular vector to the look vector
-                Vec3 perpendicularVector = new Vec3(lookVector.z, 0, -lookVector.x).normalize();
+// Calculate the up vector based on the pitch angle
+                float pitch = event.player.getXRot();
+                double pitchRadians = Math.toRadians(pitch);
+                Vec3 upVector = new Vec3(-Math.sin(pitchRadians), Math.cos(pitchRadians), 0);
 
-                // Calculate the spawn location at a radius of 2f
-                Vec3 spawnLocation = event.player.getEyePosition().add(lookVector.multiply(2f,2f,2f));
+// Calculate a perpendicular vector to the look vector
+                Vec3 perpendicularVector = lookVector.cross(upVector).normalize();
 
-                // Add particles with velocity towards the origin spawnLocation
-                for (int i = 0; i < 200; i++) {
-                    double angle = 2 * Math.PI * i / 200;
-                    double x = spawnLocation.x + 2f * Math.cos(angle) * perpendicularVector.x;
-                    double y = spawnLocation.y + 2f * Math.sin(angle);
-                    double z = spawnLocation.z + 2f * Math.cos(angle) * perpendicularVector.z;
+// Calculate the spawn location at a radius of 2f
+                Vec3 spawnLocation = event.player.getEyePosition().add(lookVector.multiply(2f, 2f, 2f));
+
+// Add particles with velocity towards the origin spawnLocation
+                for (int i = 0; i < 5; i++) {
+                    double angle = Math.toDegrees(event.player.getRandom().nextIntBetweenInclusive(0,360));
+                    double x = spawnLocation.x + 2f * Math.cos(angle) * perpendicularVector.x + (event.player.getRandom().nextFloat() - 0.5f) * 0.2;
+                    double y = spawnLocation.y + 2f * Math.sin(angle) + (event.player.getRandom().nextFloat() - 0.5f) * 0.5;
+                    double z = spawnLocation.z + 2f * Math.cos(angle) * perpendicularVector.z + (event.player.getRandom().nextFloat() - 0.5f) * 0.2;
 
                     double velocityX = (spawnLocation.x - x) * 0.1;
                     double velocityY = (spawnLocation.y - y) * 0.1;
                     double velocityZ = (spawnLocation.z - z) * 0.1;
 
-                    event.player.level().addParticle(new IgnisParticleOptions(spawnLocation,20), x, y, z, velocityX, velocityY, velocityZ);
+                    event.player.level().addParticle(new IgnisParticleOptions(spawnLocation, 20), x, y, z, velocityX, velocityY, velocityZ);
                 }
+
 
                 //event.player.playSound(SoundEvents.FIRECHARGE_USE);
             }

@@ -92,14 +92,7 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
 
-        if (!pLevel.isClientSide)
-        {
-            FireballProjectile fireballProjectile = new FireballProjectile(pPlayer, pLevel);
-            fireballProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0F, 1F, 1F);
-            pLevel.addFreshEntity(fireballProjectile);
-        }
 
-        pPlayer.awardStat(Stats.ITEM_USED.get(this));
         isBeingUsed = true;
         pPlayer.startUsingItem(pUsedHand);
 
@@ -120,13 +113,21 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
 
     @Override
     public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
+        if (!pLevel.isClientSide)
+        {
+            FireballProjectile fireballProjectile = new FireballProjectile(pLivingEntity, pLevel);
+            fireballProjectile.shootFromRotation(pLivingEntity, pLivingEntity.getXRot(), pLivingEntity.getYRot(), 0F, 1F, 1F);
+            pLevel.addFreshEntity(fireballProjectile);
+        }
+
+        pLevel.getNearestPlayer(pLivingEntity,1).awardStat(Stats.ITEM_USED.get(this));
         isBeingUsed = false;
         pLivingEntity.stopUsingItem();
     }
 
     @Override
     public int getUseDuration(ItemStack pStack) {
-        return 20;
+        return 75000;
     }
 
     private void spawnIgnisParticles(UseOnContext pContext, BlockPos posClicked)

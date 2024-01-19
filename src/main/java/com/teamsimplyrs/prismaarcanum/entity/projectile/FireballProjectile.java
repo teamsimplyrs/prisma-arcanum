@@ -1,6 +1,7 @@
 package com.teamsimplyrs.prismaarcanum.entity.projectile;
 
 import com.mojang.logging.LogUtils;
+import com.teamsimplyrs.prismaarcanum.particle.particleOptions.IgnisParticleOptions;
 import com.teamsimplyrs.prismaarcanum.registry.PAEntities;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
@@ -10,6 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 import org.slf4j.Logger;
 
 public class FireballProjectile extends ThrowableItemProjectile {
@@ -51,6 +53,10 @@ public class FireballProjectile extends ThrowableItemProjectile {
     public void tick() {
         super.tick();
 
+        if (this.level().isClientSide) {
+            this.makeParticle(2);
+        }
+
         if (this.level().isClientSide())
         {
             setupAnimationStates();
@@ -65,6 +71,19 @@ public class FireballProjectile extends ThrowableItemProjectile {
             FIREBALL_ANIM_STATE.start(this.tickCount);
         } else {
             animationTimeout--;
+        }
+    }
+
+    private void makeParticle(int pParticleAmount) {
+        if (pParticleAmount > 0) {
+            for(int j = 0; j < pParticleAmount; ++j) {
+                double x = this.getRandomX(0.5D);
+                double y = this.getRandomY();
+                double z = this.getRandomZ(0.5D);
+                Vec3 position = new Vec3(x,y,z);
+                this.level().addParticle(new IgnisParticleOptions(position,20), position.x, position.y, position.z, 0,0,0);
+            }
+
         }
     }
 }
