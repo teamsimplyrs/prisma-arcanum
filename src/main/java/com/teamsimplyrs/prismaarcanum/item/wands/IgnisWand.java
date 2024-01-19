@@ -101,7 +101,7 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
         if (!pLevel.isClientSide)
         {
             FireballProjectile fireballProjectile = new FireballProjectile(pPlayer, pLevel);
-            fireballProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0F, 1F, 1F);
+            fireballProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0f, 0.6F, 1F);
             pLevel.addFreshEntity(fireballProjectile);
         }
 

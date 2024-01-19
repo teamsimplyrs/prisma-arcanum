@@ -9,6 +9,9 @@ public class PAAnimationDefinitions {
 
     // From BlockBench, export animation as text file and copy-paste the contents for each different animation here as a separate AnimationDefinition object
 
+
+    // Animations for projectiles not working yet
+
     public static final AnimationDefinition FIREBALL_PROJECTILE_ANIMATION = AnimationDefinition.Builder.withLength(2f).looping()
             .addAnimation("all",
                     new AnimationChannel(AnimationChannel.Targets.ROTATION,

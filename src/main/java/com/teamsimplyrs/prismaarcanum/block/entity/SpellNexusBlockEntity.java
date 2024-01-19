@@ -1,6 +1,6 @@
 package com.teamsimplyrs.prismaarcanum.block.entity;
 
-import com.teamsimplyrs.prismaarcanum.item.spells.spellholograms.AbstractSpellHolgram;
+import com.teamsimplyrs.prismaarcanum.item.spells.spellholograms.AbstractSpellHologram;
 import com.teamsimplyrs.prismaarcanum.item.wands.AbstractWand;
 import com.teamsimplyrs.prismaarcanum.registry.PABlockEntityRegistry;
 import com.teamsimplyrs.prismaarcanum.screen.SpellNexusMenu;
@@ -18,7 +18,6 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -43,7 +42,7 @@ public class SpellNexusBlockEntity extends BlockEntity implements MenuProvider {
             if(slot==0){
                 return stack.getItem() instanceof AbstractWand;
             }
-            return stack.getItem() instanceof AbstractSpellHolgram && getStackInSlot(0).getItem() instanceof AbstractWand;
+            return stack.getItem() instanceof AbstractSpellHologram && getStackInSlot(0).getItem() instanceof AbstractWand;
         }
 
         @Override
