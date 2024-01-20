@@ -6,15 +6,17 @@ import com.teamsimplyrs.prismaarcanum.item.wands.AbstractWand;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class GuiWandHUD implements IGuiOverlay{
 
     public static GuiWandHUD WandHUDOverlay = new GuiWandHUD();
     private static final Minecraft minecraft = Minecraft.getInstance();
+    private static final Logger LOG = LogManager.getLogger();
 
     private static final ResourceLocation WAND_HUD = new ResourceLocation(PrismaArcanum.MODID, "textures/gui/wand_spellview_gui.png");
     private static final ResourceLocation WAND_AFFINITY = new ResourceLocation(PrismaArcanum.MODID, "textures/gui/wand_affinity_overlay.png");
@@ -36,9 +38,10 @@ public class GuiWandHUD implements IGuiOverlay{
 
             int offsetX = 10;
             int offsetY = minecraft.getWindow().getGuiScaledHeight() - 5;
+            LOG.info(offsetY);
             int affinityDisplayWidth = wand.currentAffinity;
 
-            guiGraphics.blit(WAND_HUD, offsetX, offsetY, 0, 0, 64, 64, 64, 64);
+            guiGraphics.blit(WAND_HUD, offsetX, offsetY-50, 0, 0, 64, 64, 64, 64);
 
         }
     }
