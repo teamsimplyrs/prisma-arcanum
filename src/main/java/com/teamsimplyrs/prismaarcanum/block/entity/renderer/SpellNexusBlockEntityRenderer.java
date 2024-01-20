@@ -22,7 +22,7 @@ public class SpellNexusBlockEntityRenderer implements BlockEntityRenderer<SpellN
 
     //    private static int renderStackRotationDegrees = 0;
     private static final Logger LOGGER = LogManager.getLogger();
-    private static int countTracker = 0;
+    private static float countTracker = 0;
     private static float previousPartialTick = 0;
 
     public SpellNexusBlockEntityRenderer(BlockEntityRendererProvider.Context context) {
@@ -31,12 +31,7 @@ public class SpellNexusBlockEntityRenderer implements BlockEntityRenderer<SpellN
 
     @Override
     public void render(SpellNexusBlockEntity blockEntity, float pPartialTick, PoseStack poseStack, MultiBufferSource multiBufferSource, int pPackedLight, int pPackedOverlay) {
-
-        if (pPartialTick < previousPartialTick) {
-            countTracker++;
-        }
-
-        previousPartialTick = pPartialTick;
+        countTracker += pPartialTick/2f;
 
         if (countTracker > 72) {
             countTracker = 0;

@@ -44,6 +44,7 @@ public class PrismaArcanum
         PAMenuTypes.register(modEventBus);
         PAParticles.register(modEventBus);
         PAEntities.register(modEventBus);
+        PASpellRegistry.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         // Register the item to a creative tab

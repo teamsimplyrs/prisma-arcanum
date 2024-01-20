@@ -38,7 +38,6 @@ public class GuiWandHUD implements IGuiOverlay{
 
             int offsetX = 10;
             int offsetY = minecraft.getWindow().getGuiScaledHeight() - 5;
-            LOG.info(offsetY);
             int affinityDisplayWidth = wand.currentAffinity;
 
             guiGraphics.blit(WAND_HUD, offsetX, offsetY-50, 0, 0, 64, 64, 64, 64);
