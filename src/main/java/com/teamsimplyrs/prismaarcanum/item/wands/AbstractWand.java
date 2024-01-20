@@ -15,10 +15,14 @@ public abstract class AbstractWand extends Item {
     public static final String ITEM_NAME = "Wand";
     public static final Properties ITEM_PROPERTIES = new Properties();
 
-    public static List<SpellBase> listSpells = new ArrayList<>();
+    public static List<SpellBase> listSpells;
+
+    public int maxAffinity = 100;
+    public int currentAffinity;
 
     public AbstractWand() {
         super(ITEM_PROPERTIES);
+        this.currentAffinity = this.maxAffinity;
     }
 
     public AbstractWand(Properties pProperties)

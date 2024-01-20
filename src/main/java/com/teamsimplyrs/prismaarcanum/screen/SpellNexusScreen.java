@@ -16,8 +16,8 @@ public class SpellNexusScreen extends AbstractContainerScreen<SpellNexusMenu> {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    private static final ResourceLocation MENU_TEXTURE = new ResourceLocation(PrismaArcanum.MODID, "textures/gui/spell_nexus_gui.png");
-    private static final ResourceLocation MENU_SPELL_SLOT_TEXTURE = new ResourceLocation(PrismaArcanum.MODID, "textures/gui/spell_nexus_spell_slot.png");
+    private static final ResourceLocation MENU_TEXTURE = new ResourceLocation(PrismaArcanum.MODID, "textures/client/spell_nexus_gui.png");
+    private static final ResourceLocation MENU_SPELL_SLOT_TEXTURE = new ResourceLocation(PrismaArcanum.MODID, "textures/client/spell_nexus_spell_slot.png");
     private static SpellNexusMenu menu;
     public SpellNexusScreen(SpellNexusMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
