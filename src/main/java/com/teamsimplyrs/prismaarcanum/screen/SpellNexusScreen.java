@@ -4,6 +4,8 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.logging.LogUtils;
 import com.teamsimplyrs.prismaarcanum.PrismaArcanum;
 import com.teamsimplyrs.prismaarcanum.item.wands.AbstractWand;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -19,6 +21,8 @@ public class SpellNexusScreen extends AbstractContainerScreen<SpellNexusMenu> {
     private static final ResourceLocation MENU_TEXTURE = new ResourceLocation(PrismaArcanum.MODID, "textures/gui/spell_nexus_gui.png");
     private static final ResourceLocation MENU_SPELL_SLOT_TEXTURE = new ResourceLocation(PrismaArcanum.MODID, "textures/gui/spell_nexus_spell_slot.png");
     private static SpellNexusMenu menu;
+
+    private Font font;
     public SpellNexusScreen(SpellNexusMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
         this.menu = pMenu;
@@ -30,6 +34,7 @@ public class SpellNexusScreen extends AbstractContainerScreen<SpellNexusMenu> {
         this.inventoryLabelY = 30000;
 //        this.titleLabelX = (width - this.imageWidth)/2;
         this.titleLabelY = 90;
+        this.font = Minecraft.getInstance().font;
     }
 
     @Override
@@ -46,10 +51,15 @@ public class SpellNexusScreen extends AbstractContainerScreen<SpellNexusMenu> {
 
         if (menu.getWandInSlot().getItem() instanceof AbstractWand)
         {
+            // Menu Spell Hologram slots
             guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2-16, height/2-121, 0, 0, 32, 32,32,32);
             guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2-16, height/2-25, 0, 0, 32, 32,32,32);
             guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2-80+16, height/2-73, 0, 0, 32, 32,32,32);
             guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2+48-16, height/2-73, 0, 0, 32, 32,32,32);
+
+            // Menu Infuse button
+            guiGraphics.blit(MENU_TEXTURE, x+126, y+108, 208, 0, 48, 16);
+            guiGraphics.drawString(, "Infuse", x+132, y+213, 1298129);
         }
     }
 
