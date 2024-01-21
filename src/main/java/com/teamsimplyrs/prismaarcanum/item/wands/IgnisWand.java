@@ -29,7 +29,8 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
     public static final Properties ITEM_PROPERTIES = new Properties();
 
     public static List<SpellBase> listSpellsIgnis = new ArrayList<>();
-    public static boolean isBeingUsed = false;
+    public final String WAND_ELEMENT = "ignis";
+    private boolean isBeingUsed = false;
 
     private static int spellIndex = 0;
 
@@ -73,19 +74,18 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
         return false;
     }
 
-    @Override
-    public boolean displayHUD(ItemStack stack, Player player) {
-        return false;
-    }
 
     @Override
-    public boolean cast(ItemStack stack, SpellBase spell, Player caster) {
-        return false;
+    public boolean cast(Player caster) {
+        this.currentAffinity = Math.max(this.currentAffinity - 100, 0);
+        return true;
     }
 
-    public boolean isBeingUsed(){
+    public boolean isBeingUsed()
+    {
         return isBeingUsed;
     }
+
 
 
     @Override
@@ -104,7 +104,7 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
         isBeingUsed = true;
         pPlayer.startUsingItem(pUsedHand);
 
-        return InteractionResultHolder.sidedSuccess(itemStack, pLevel.isClientSide());
+        return this.cast(pPlayer) ? InteractionResultHolder.sidedSuccess(itemStack, pLevel.isClientSide()) : InteractionResultHolder.fail(itemStack);
     }
 
     @Override

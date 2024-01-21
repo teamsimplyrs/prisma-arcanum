@@ -117,7 +117,7 @@ public class SpellNexusMenu extends AbstractContainerMenu {
         {
             for (int j = 0; j < 9; ++j)
             {
-                this.addSlot(new Slot(pPlayerInv, j + i*9 + 9, 8 + j*18, 114 + i*18));
+                this.addSlot(new Slot(pPlayerInv, j + i*9 + 9, 8 + j*18, 136 + i*18));
             }
         }
     }
@@ -126,7 +126,7 @@ public class SpellNexusMenu extends AbstractContainerMenu {
     {
         for (int i = 0; i < 9; i++)
         {
-            this.addSlot(new Slot(pPlayerInv, i, 8 + i*18, 172));
+            this.addSlot(new Slot(pPlayerInv, i, 8 + i*18, 194));
         }
     }
 

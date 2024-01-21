@@ -15,6 +15,8 @@ public class LuxWand extends AbstractWand implements ICastingItem {
     public static final Properties ITEM_PROPERTIES = new Properties();
 
     public static List<SpellBase> listSpellsIgnis = new ArrayList<>();
+
+    public final String WAND_ELEMENT = "lux";
     @Override
     public SpellBase getCurrentSpell(ItemStack stack) {
         return null;
@@ -45,13 +47,9 @@ public class LuxWand extends AbstractWand implements ICastingItem {
         return false;
     }
 
-    @Override
-    public boolean displayHUD(ItemStack stack, Player player) {
-        return false;
-    }
 
     @Override
-    public boolean cast(ItemStack stack, SpellBase spell, Player caster) {
+    public boolean cast(Player caster) {
         return false;
     }
 }

@@ -9,13 +9,13 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 public class PASpellRegistry {
-    public static final DeferredRegister<SpellBase> PA_SPELL = DeferredRegister.create(new ResourceLocation(PrismaArcanum.MODID,"spell_registry"), PrismaArcanum.MODID);
-
-    public static final RegistryObject<SpellBase> IGNIS_FIREBALL = PA_SPELL.register("ignis_fireball",()->new IgnisFireball());
-
-
-    public static void register(IEventBus eventBus)
-    {
-        PA_SPELL.register(eventBus);
-    }
+//    public static final DeferredRegister<SpellBase> PA_SPELL = DeferredRegister.create(new ResourceLocation("spell_registry"), PrismaArcanum.MODID);
+//
+//    public static final RegistryObject<SpellBase> IGNIS_FIREBALL = PA_SPELL.register("ignis_fireball",()->new IgnisFireball());
+//
+//
+//    public static void register(IEventBus eventBus)
+//    {
+//        PA_SPELL.register(eventBus);
+//    }
 }

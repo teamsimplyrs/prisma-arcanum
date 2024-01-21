@@ -20,8 +20,7 @@ public interface ICastingItem {
 
     boolean selectSpell(ItemStack stack, int index);
 
-    boolean displayHUD(ItemStack stack, Player player);
 
-    boolean cast(ItemStack stack, SpellBase spell, Player caster);
+    boolean cast(Player caster);
 
 }

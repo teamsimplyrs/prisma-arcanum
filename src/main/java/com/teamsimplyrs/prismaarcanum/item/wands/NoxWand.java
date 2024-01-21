@@ -15,6 +15,7 @@ public class NoxWand extends AbstractWand implements ICastingItem{
     public static final Properties ITEM_PROPERTIES = new Properties();
 
     public static List<SpellBase> listSpellsIgnis = new ArrayList<>();
+    public final String WAND_ELEMENT = "nox";
     @Override
     public SpellBase getCurrentSpell(ItemStack stack) {
         return null;
@@ -46,12 +47,7 @@ public class NoxWand extends AbstractWand implements ICastingItem{
     }
 
     @Override
-    public boolean displayHUD(ItemStack stack, Player player) {
-        return false;
-    }
-
-    @Override
-    public boolean cast(ItemStack stack, SpellBase spell, Player caster) {
+    public boolean cast(Player caster) {
         return false;
     }
 }

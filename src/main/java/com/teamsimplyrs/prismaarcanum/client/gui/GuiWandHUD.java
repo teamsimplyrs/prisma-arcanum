@@ -35,12 +35,14 @@ public class GuiWandHUD implements IGuiOverlay{
             PoseStack pose = guiGraphics.pose();
             AbstractWand wand = (AbstractWand) minecraft.player.getMainHandItem().getItem();
             int maxAffinity = wand.maxAffinity;
+            int currentAffinity = wand.currentAffinity;
 
-            int offsetX = 10;
+            int offsetX = 20;
             int offsetY = minecraft.getWindow().getGuiScaledHeight() - 5;
-            int affinityDisplayWidth = wand.currentAffinity;
+            int affinityDisplayWidth = (int) (((float) currentAffinity / maxAffinity) * 128.0);
 
-            guiGraphics.blit(WAND_HUD, offsetX, offsetY-50, 0, 0, 64, 64, 64, 64);
+            guiGraphics.blit(WAND_AFFINITY, offsetX, offsetY-112, 0, 0, affinityDisplayWidth, 32, 128, 32);
+            guiGraphics.blit(WAND_HUD, offsetX, offsetY-114, 0, 0, 128, 128, 128, 128);
 
         }
     }
