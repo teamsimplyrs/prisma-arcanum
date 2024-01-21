@@ -40,16 +40,16 @@ public class SpellNexusScreen extends AbstractContainerScreen<SpellNexusMenu> {
 //        this.imageHeight = 256;
 //        this.imageWidth = 256;
         int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
+        int y = (height - imageHeight - 50) / 2;
 
         guiGraphics.blit(MENU_TEXTURE, x, y, 0, 0, imageWidth, imageHeight+60);
 
         if (menu.getWandInSlot().getItem() instanceof AbstractWand)
         {
-            guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2-16, height/2-96, 0, 0, 32, 32,32,32);
-            guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2-16, height/2, 0, 0, 32, 32,32,32);
-            guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2-80+16, height/2-48, 0, 0, 32, 32,32,32);
-            guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2+48-16, height/2-48, 0, 0, 32, 32,32,32);
+            guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2-16, height/2-121, 0, 0, 32, 32,32,32);
+            guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2-16, height/2-25, 0, 0, 32, 32,32,32);
+            guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2-80+16, height/2-73, 0, 0, 32, 32,32,32);
+            guiGraphics.blit(MENU_SPELL_SLOT_TEXTURE, width/2+48-16, height/2-73, 0, 0, 32, 32,32,32);
         }
     }
 
