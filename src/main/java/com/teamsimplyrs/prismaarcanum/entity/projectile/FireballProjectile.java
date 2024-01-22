@@ -1,9 +1,9 @@
 package com.teamsimplyrs.prismaarcanum.entity.projectile;
 
 import com.mojang.logging.LogUtils;
-import com.teamsimplyrs.prismaarcanum.particle.PAParticles;
 import com.teamsimplyrs.prismaarcanum.particle.particleOptions.IgnisParticleOptions;
 import com.teamsimplyrs.prismaarcanum.registry.PAEntities;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.AnimationState;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -47,6 +47,7 @@ public class FireballProjectile extends ThrowableItemProjectile {
         {
             this.level().broadcastEntityEvent(this, (byte) 3);
             this.level().setBlock(blockPosition(), Blocks.FIRE.defaultBlockState(), 3);
+            this.level().explode(this, this.getX(), this.getY(0.0625D), this.getZ(), 4.0F, Level.ExplosionInteraction.MOB);
             this.discard();
         }
     }
@@ -66,13 +67,7 @@ public class FireballProjectile extends ThrowableItemProjectile {
         super.tick();
 
         if (this.level().isClientSide) {
-            this.makeParticle(2);
-        }
-
-        if (this.level().isClientSide())
-        {
-            setupAnimationStates();
-            summonSpellParticles((float) this.position().x, (float) this.position().y, (float) this.position().z);
+            this.makeParticle(10);
         }
     }
 
@@ -82,22 +77,19 @@ public class FireballProjectile extends ThrowableItemProjectile {
 //        FIREBALL_ANIM_STATE.animateWhen(true, this.tickCount);
     }
 
-    private void summonSpellParticles(float posX, float posY, float posZ)
-    {
-        Vec3 position = new Vec3(posX,posY,posZ);
-        this.level().addParticle(new IgnisParticleOptions(position,20),
-                posX, posY, posZ, 1f, 1f, 1f
-                );
-    }
 
     private void makeParticle(int pParticleAmount) {
         if (pParticleAmount > 0) {
             for(int j = 0; j < pParticleAmount; ++j) {
                 double x = this.getRandomX(0.5D);
-                double y = this.getRandomY();
+                double y = this.getRandomY()+1;
                 double z = this.getRandomZ(0.5D);
+                double x2 = this.getRandomX(0.5D);
+                double y2 = this.getRandomY()+1;
+                double z2 = this.getRandomZ(0.5D);
                 Vec3 position = new Vec3(x,y,z);
                 this.level().addParticle(new IgnisParticleOptions(position,20), position.x, position.y, position.z, 0,0,0);
+                this.level().addParticle(ParticleTypes.SMOKE, x2, y2, z2, 0,0,0);
             }
 
         }

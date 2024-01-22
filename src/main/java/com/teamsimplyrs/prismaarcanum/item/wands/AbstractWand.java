@@ -7,7 +7,6 @@ import net.minecraft.world.item.UseAnim;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractWand extends Item {
@@ -17,6 +16,7 @@ public abstract class AbstractWand extends Item {
     public static final Properties ITEM_PROPERTIES = new Properties();
 
     public static List<SpellBase> listSpells;
+    public String current_spell_name;
 
     public final String WAND_ELEMENT = "none";
 

@@ -37,6 +37,7 @@ public class PrismaArcanum
     {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        PASpellRegistry.register(modEventBus);
         PACreativeTabsRegistry.register(modEventBus);
         PAItemRegistry.register(modEventBus);
         PABlockRegistry.register(modEventBus);
@@ -44,7 +45,6 @@ public class PrismaArcanum
         PAMenuTypes.register(modEventBus);
         PAParticles.register(modEventBus);
         PAEntities.register(modEventBus);
-        PASpellRegistry.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
         // Register the item to a creative tab

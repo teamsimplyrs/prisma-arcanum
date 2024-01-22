@@ -21,4 +21,10 @@ public class PASpellRegistry {
     {
         PA_SPELL.register(eventBus);
     }
+
+    public static SpellBase getSpell(String spellname){
+        ResourceLocation spellLocation = new ResourceLocation(PrismaArcanum.MODID,spellname);
+        SpellBase toReturn = PA_SPELL_REGISTRY_SUPPLIER.get().getValue(spellLocation);
+        return toReturn;
+    }
 }

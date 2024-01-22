@@ -11,6 +11,7 @@ import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.player.Inventory;
 import org.slf4j.Logger;
 
@@ -59,7 +60,7 @@ public class SpellNexusScreen extends AbstractContainerScreen<SpellNexusMenu> {
 
             // Menu Infuse button
             guiGraphics.blit(MENU_TEXTURE, x+126, y+108, 208, 0, 48, 16);
-            guiGraphics.drawString(, "Infuse", x+132, y+213, 1298129);
+            guiGraphics.drawString(font, "Infuse", x+132, y+213, 1298129);
         }
     }
 

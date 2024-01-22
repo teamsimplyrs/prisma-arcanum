@@ -7,11 +7,15 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Nullable;
 
 public class IgnisParticles extends TextureSheetParticle {
 
     private final Vec3 target;
+    private final int travelTime;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     protected IgnisParticles(ClientLevel pLevel, double pX, double pY, double pZ, double pXSpeed, double pYSpeed, double pZSpeed, Vec3 pTarget, int pLifetime , SpriteSet spriteSet) {
         super(pLevel, pX, pY, pZ, pXSpeed, pYSpeed, pZSpeed);
@@ -30,7 +34,8 @@ public class IgnisParticles extends TextureSheetParticle {
         this.bCol = 1f;
 
         this.target = pTarget;
-        this.lifetime = pLifetime;
+        this.lifetime = pLifetime+10;
+        this.travelTime = pLifetime;
     }
 
     @Override
@@ -43,19 +48,21 @@ public class IgnisParticles extends TextureSheetParticle {
         } else {
             Vec3 destination = this.target;
 
-                int i = this.lifetime - this.age;
+                int i = this.travelTime  - this.age;
                 double d0 = 1.0D / (double)i;
                 this.x = Mth.lerp(d0, this.x, destination.x());
                 this.y = Mth.lerp(d0, this.y, destination.y());
                 this.z = Mth.lerp(d0, this.z, destination.z());
                 this.setPos(this.x, this.y, this.z); // FORGE: Update the particle's bounding box
          }
-        particleFadeOut();
+        if(age/(float)lifetime>0.5f){
+            particleFadeOut();
+        }
     }
 
     private void particleFadeOut()
     {
-        this.alpha = (-(1/(float)lifetime) * age + 1);
+        this.alpha = (1.2f-(age/(float)lifetime));
     }
 
     @Override

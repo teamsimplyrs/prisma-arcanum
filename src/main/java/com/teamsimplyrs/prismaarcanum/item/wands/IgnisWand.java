@@ -1,8 +1,9 @@
 package com.teamsimplyrs.prismaarcanum.item.wands;
 
-import com.teamsimplyrs.prismaarcanum.entity.projectile.FireballProjectile;
 import com.teamsimplyrs.prismaarcanum.item.interfaces.ICastingItem;
 import com.teamsimplyrs.prismaarcanum.item.spells.SpellBase;
+import com.teamsimplyrs.prismaarcanum.item.spells.interitus.IgnisFireball;
+import com.teamsimplyrs.prismaarcanum.registry.PASpellRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
@@ -23,12 +24,13 @@ import java.util.List;
 
 public class IgnisWand extends AbstractWand implements ICastingItem {
 
-    private static final Logger LOG = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
     public static final String ITEM_NAME = "ignis_wand_tier1";
 
     public static final Properties ITEM_PROPERTIES = new Properties();
 
     public static List<SpellBase> listSpellsIgnis = new ArrayList<>();
+    public String current_spell_name = "ignis_fireball";
     public final String WAND_ELEMENT = "ignis";
     private boolean isBeingUsed = false;
 
@@ -92,13 +94,6 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
 
-//        if (!pLevel.isClientSide)
-//        {
-//            FireballProjectile fireballProjectile = new FireballProjectile(pPlayer, pLevel);
-//            fireballProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0f, 0.6F, 1F);
-//            pLevel.addFreshEntity(fireballProjectile);
-//        }
-
         pPlayer.awardStat(Stats.ITEM_USED.get(this));
 
         isBeingUsed = true;
@@ -121,12 +116,11 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
 
     @Override
     public void releaseUsing(ItemStack pStack, Level pLevel, LivingEntity pLivingEntity, int pTimeCharged) {
-        if (!pLevel.isClientSide)
-        {
-            FireballProjectile fireballProjectile = new FireballProjectile(pLivingEntity, pLevel);
-            fireballProjectile.shootFromRotation(pLivingEntity, pLivingEntity.getXRot(), pLivingEntity.getYRot(), 0F, 1F, 1F);
-            pLevel.addFreshEntity(fireballProjectile);
-        }
+
+        IgnisFireball currentSpell = (IgnisFireball) PASpellRegistry.getSpell(current_spell_name);
+        Player pPlayer = (Player) pLivingEntity;
+        InteractionHand pUsedHand = pPlayer.getUsedItemHand();
+        currentSpell.spellCast(pLevel,pPlayer,pUsedHand);
 
         pLevel.getNearestPlayer(pLivingEntity,1).awardStat(Stats.ITEM_USED.get(this));
         isBeingUsed = false;
