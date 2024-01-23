@@ -20,7 +20,7 @@ public class FireballProjectile extends ThrowableItemProjectile {
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final AnimationState FIREBALL_ANIM_STATE = new AnimationState();
+    public final AnimationState FIREBALL_ANIM_STATE = new AnimationState();
     private int animationTimeout = 0;
 
 
@@ -68,24 +68,25 @@ public class FireballProjectile extends ThrowableItemProjectile {
 
         if (this.level().isClientSide) {
             this.makeParticle(10);
+            setupAnimationStates();
         }
     }
 
     private void setupAnimationStates()
     {
-//        FIREBALL_ANIM_STATE.start(this.tickCount);
-//        FIREBALL_ANIM_STATE.animateWhen(true, this.tickCount);
+        FIREBALL_ANIM_STATE.startIfStopped(this.tickCount);
     }
+
 
 
     private void makeParticle(int pParticleAmount) {
         if (pParticleAmount > 0) {
             for(int j = 0; j < pParticleAmount; ++j) {
                 double x = this.getRandomX(0.5D);
-                double y = this.getRandomY()+1;
+                double y = this.getRandomY();
                 double z = this.getRandomZ(0.5D);
                 double x2 = this.getRandomX(0.5D);
-                double y2 = this.getRandomY()+1;
+                double y2 = this.getRandomY();
                 double z2 = this.getRandomZ(0.5D);
                 Vec3 position = new Vec3(x,y,z);
                 this.level().addParticle(new IgnisParticleOptions(position,20), position.x, position.y, position.z, 0,0,0);

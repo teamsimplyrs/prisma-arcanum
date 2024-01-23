@@ -2,21 +2,16 @@ package com.teamsimplyrs.prismaarcanum.entity.client.renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
 import com.teamsimplyrs.prismaarcanum.PrismaArcanum;
 import com.teamsimplyrs.prismaarcanum.entity.client.PAModelLayers;
 import com.teamsimplyrs.prismaarcanum.entity.client.model.FireballProjectileModel;
 import com.teamsimplyrs.prismaarcanum.entity.projectile.FireballProjectile;
-import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
-import org.joml.Quaternionf;
 
 public class FireballProjectileRenderer extends EntityRenderer<FireballProjectile> {
 
@@ -25,7 +20,7 @@ public class FireballProjectileRenderer extends EntityRenderer<FireballProjectil
     protected FireballProjectileModel model;
     public FireballProjectileRenderer(EntityRendererProvider.Context pContext) {
         super(pContext);
-        this.model = new FireballProjectileModel(pContext.bakeLayer(PAModelLayers.FIREBALL_PROJECTILE_LAYER));
+        this.model = new FireballProjectileModel<>(pContext.bakeLayer(PAModelLayers.FIREBALL_PROJECTILE_LAYER));
         this.shadowRadius = 0.5f;
     }
 
@@ -43,7 +38,7 @@ public class FireballProjectileRenderer extends EntityRenderer<FireballProjectil
 //        pPoseStack.mulPose(Axis.YP.rotationDegrees(pEntity.getYRot()+1));
 
         VertexConsumer vertexconsumer = ItemRenderer.getFoilBufferDirect(pBuffer, this.model.renderType(this.getTextureLocation(pEntity)), false, false);
-
+        this.model.setupAnim(pEntity,0, 0,pEntity.tickCount,0,0);
         this.model.renderToBuffer(pPoseStack, vertexconsumer, pPackedLight, OverlayTexture.NO_OVERLAY, 1f, 0f, 0f, 1f);
         pPoseStack.popPose();
 
