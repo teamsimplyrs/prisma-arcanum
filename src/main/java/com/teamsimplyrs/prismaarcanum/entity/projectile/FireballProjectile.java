@@ -83,13 +83,14 @@ public class FireballProjectile extends ThrowableItemProjectile {
         if (pParticleAmount > 0) {
             for(int j = 0; j < pParticleAmount; ++j) {
                 double x = this.getRandomX(0.5D);
-                double y = this.getRandomY();
+                double y = this.getRandomY()-0.5;
                 double z = this.getRandomZ(0.5D);
                 double x2 = this.getRandomX(0.5D);
-                double y2 = this.getRandomY();
+                double y2 = this.getRandomY()-0.5;
                 double z2 = this.getRandomZ(0.5D);
+                LOGGER.info("entity height is:"+this.getBbHeight());
                 Vec3 position = new Vec3(x,y,z);
-                this.level().addParticle(new IgnisParticleOptions(position,20), position.x, position.y, position.z, 0,0,0);
+                this.level().addParticle(new IgnisParticleOptions(position,20), x, y, z, 0,0,0);
                 this.level().addParticle(ParticleTypes.SMOKE, x2, y2, z2, 0,0,0);
             }
 
