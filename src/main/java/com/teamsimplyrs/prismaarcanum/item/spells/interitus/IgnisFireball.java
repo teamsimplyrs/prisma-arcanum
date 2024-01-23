@@ -42,7 +42,8 @@ public class IgnisFireball extends SpellProjectile {
         Vec3 upVector = new Vec3(-Math.sin(pitchRadians), Math.cos(pitchRadians), 0);
 
         // Calculate a perpendicular vector to the look vector
-        Vec3 perpendicularVector = lookVector.cross(upVector).normalize();
+        Vec3 UVector = lookVector.cross(upVector).normalize();
+        Vec3 VVector = lookVector.cross(UVector).normalize();
 
         // Calculate the spawn location at a radius of 2f
         Vec3 spawnLocation = pPlayer.getEyePosition().add(lookVector.multiply(2f, 2f, 2f));
@@ -51,18 +52,11 @@ public class IgnisFireball extends SpellProjectile {
         for (int i = 0; i < 5; i++) {
             double angle = Math.toDegrees(pPlayer.getRandom().nextIntBetweenInclusive(0,360));
             double x, y, z;
-            if (Math.abs(lookVector.y) <= 0.8f)
-            {
-                x = spawnLocation.x + 2f * Math.cos(angle) * perpendicularVector.x + (pPlayer.getRandom().nextFloat() - 0.5f) * 0.2;
-                y = spawnLocation.y + 2f * Math.sin(angle) + (pPlayer.getRandom().nextFloat() - 0.5f) * 0.5;
-                z = spawnLocation.z + 2f * Math.cos(angle) * perpendicularVector.z + (pPlayer.getRandom().nextFloat() - 0.5f) * 0.2;
-            }
-            else
-            {
-                x = spawnLocation.x + 2f * Math.cos(angle) + (pPlayer.getRandom().nextFloat() - 0.5f) * 0.2;
-                y = spawnLocation.y + 2f * Math.cos(angle) * perpendicularVector.y + (pPlayer.getRandom().nextFloat() - 0.5f) * 0.5;
-                z = spawnLocation.z + 2f * Math.sin(angle) + (pPlayer.getRandom().nextFloat() - 0.5f) * 0.2;
-            }
+
+            x = spawnLocation.x + UVector.x * 2f * Math.cos(angle) + VVector.x * 2f * Math.sin(angle) + (pPlayer.getRandom().nextFloat() - 0.5f) * 0.2;
+            y = spawnLocation.y + UVector.y * 2f * Math.cos(angle) + VVector.y * 2f * Math.sin(angle) + (pPlayer.getRandom().nextFloat() - 0.5f) * 0.2;
+            z = spawnLocation.z + UVector.z * 2f * Math.cos(angle) + VVector.z * 2f * Math.sin(angle) + (pPlayer.getRandom().nextFloat() - 0.5f) * 0.2;
+
 
             double velocityX = (spawnLocation.x - x) * 0.1;
             double velocityY = (spawnLocation.y - y) * 0.1;
