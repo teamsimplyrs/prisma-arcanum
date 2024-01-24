@@ -24,6 +24,8 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
+import static com.teamsimplyrs.prismaarcanum.registry.PAItemRegistry.initSpellHolograms;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(PrismaArcanum.MODID)
 public class PrismaArcanum
@@ -71,6 +73,7 @@ public class PrismaArcanum
             event.accept(PAItemRegistry.RAW_IGNIS);
             event.accept(PAItemRegistry.IGNIS_WAND);
         }
+        initSpellHolograms();
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

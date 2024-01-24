@@ -93,4 +93,19 @@ public class IgnisFireball extends SpellProjectile {
             }
         }
     }
+
+    @Override
+    public boolean shouldSpellEvolve() {
+        return true;
+    }
+
+    @Override
+    public int maximumMasteryPoints() {
+        return 0;
+    }
+
+    @Override
+    public int masteryPointsToNextEvo() {
+        return 0;
+    }
 }

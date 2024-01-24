@@ -22,4 +22,19 @@ public class Ignite extends SpellBase {
     public void chargeSpell(Player pPlayer) {
 
     }
+
+    @Override
+    public boolean shouldSpellEvolve() {
+        return false;
+    }
+
+    @Override
+    public int maximumMasteryPoints() {
+        return 0;
+    }
+
+    @Override
+    public int masteryPointsToNextEvo() {
+        return 0;
+    }
 }
