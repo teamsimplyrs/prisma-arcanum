@@ -33,6 +33,7 @@ public class FireballProjectileRenderer extends EntityRenderer<FireballProjectil
     public void render(FireballProjectile pEntity, float pEntityYaw, float pPartialTick, PoseStack pPoseStack, MultiBufferSource pBuffer, int pPackedLight) {
 
         pPoseStack.pushPose();
+        pPoseStack.scale((float) (pEntity.scale.x), (float) (pEntity.scale.y), (float) (pEntity.scale.z));
 //        pPoseStack.rotateAround(new Quaternionf(1f, 1f, 1f, 1f), pEntity.getXRot()+1, pEntity.getYRot()+1, 1f);
 //        pPoseStack.mulPose(Axis.XP.rotationDegrees(pEntity.getXRot()+1));
 //        pPoseStack.mulPose(Axis.YP.rotationDegrees(pEntity.getYRot()+1));

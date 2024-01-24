@@ -21,6 +21,7 @@ public class FireballProjectile extends ThrowableItemProjectile {
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public final AnimationState FIREBALL_ANIM_STATE = new AnimationState();
+    public Vec3 scale = new Vec3(0.1,0.1,0.1);
     private int animationTimeout = 0;
 
 
@@ -65,9 +66,15 @@ public class FireballProjectile extends ThrowableItemProjectile {
     @Override
     public void tick() {
         super.tick();
-
+        if(!(scale.x > 1f))
+            scale = scale.add(0.05,0.05,0.05);
         if (this.level().isClientSide) {
-            this.makeParticle(10);
+            if(!this.getDeltaMovement().equals(Vec3.ZERO)){
+                this.makeParticle(10);
+            }
+            else{
+                this.makeParticle(2);
+            }
             setupAnimationStates();
         }
     }
@@ -88,7 +95,6 @@ public class FireballProjectile extends ThrowableItemProjectile {
                 double x2 = this.getRandomX(0.5D);
                 double y2 = this.getRandomY()-0.5;
                 double z2 = this.getRandomZ(0.5D);
-                LOGGER.info("entity height is:"+this.getBbHeight());
                 Vec3 position = new Vec3(x,y,z);
                 this.level().addParticle(new IgnisParticleOptions(position,20), x, y, z, 0,0,0);
                 this.level().addParticle(ParticleTypes.SMOKE, x2, y2, z2, 0,0,0);

@@ -3,7 +3,9 @@ package com.teamsimplyrs.prismaarcanum.item.spells.interitus;
 import com.teamsimplyrs.prismaarcanum.entity.projectile.FireballProjectile;
 import com.teamsimplyrs.prismaarcanum.item.spells.SpellProjectile;
 import com.teamsimplyrs.prismaarcanum.particle.particleOptions.IgnisParticleOptions;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -11,12 +13,15 @@ import net.minecraft.world.phys.Vec3;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.UUID;
+
 public class IgnisFireball extends SpellProjectile {
 
     public static String spellName = "Fireball";
     public static String spellElement = "Ignis";
     public static String spellSchool = "Interitus";
     private static final Logger LOGGER = LogManager.getLogger();
+    private UUID currentFireballUUID = null;
 
 
     @Override
@@ -24,11 +29,12 @@ public class IgnisFireball extends SpellProjectile {
     {
         ItemStack itemStack = pPlayer.getItemInHand(pUsedHand);
 
-        if (!pLevel.isClientSide)
-        {
-            FireballProjectile fireballProjectile = new FireballProjectile(pPlayer, pLevel);
-            fireballProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0f, 0.6F, 1F);
-            pLevel.addFreshEntity(fireballProjectile);
+        if (!pLevel.isClientSide){
+            FireballProjectile entity = (FireballProjectile) ((ServerLevel)pLevel).getEntity(currentFireballUUID);
+            if(entity.getDeltaMovement().equals(Vec3.ZERO)){
+                entity.setNoGravity(false);
+                entity.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0f, 0.6F, 1F);
+            }
         }
     }
 
@@ -63,6 +69,28 @@ public class IgnisFireball extends SpellProjectile {
             double velocityZ = (spawnLocation.z - z) * 0.1;
 
             pPlayer.level().addParticle(new IgnisParticleOptions(spawnLocation, 10), x, y, z, velocityX, velocityY, velocityZ);
+        }
+
+        Level level = pPlayer.level();
+        if(!level.isClientSide()){
+            ServerLevel serverLevel = (ServerLevel)level;
+            if(currentFireballUUID==null){
+                FireballProjectile fireballProjectile = new FireballProjectile(pPlayer, serverLevel);
+                fireballProjectile.setPos(pPlayer.getEyePosition().add(lookVector.multiply(2f, 2f, 2f)));
+                fireballProjectile.setNoGravity(true);
+                serverLevel.addFreshEntity(fireballProjectile);
+                currentFireballUUID = fireballProjectile.getUUID();
+//                fireballProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0f, 0.6F, 1F);
+            }
+            else{
+                Entity entity = serverLevel.getEntity(currentFireballUUID);
+                if(entity==null){
+                    currentFireballUUID = null;
+                }
+                else if(entity.getDeltaMovement().equals(Vec3.ZERO)){
+                    entity.setPos(pPlayer.getEyePosition().add(lookVector.multiply(2f, 2f, 2f)));
+                }
+            }
         }
     }
 }
