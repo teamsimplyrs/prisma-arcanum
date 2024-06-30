@@ -17,11 +17,14 @@ import java.util.UUID;
 
 public class IgnisFireball extends SpellProjectile {
 
-    public static String spellName = "Fireball";
-    public static String spellElement = "Ignis";
-    public static String spellSchool = "Interitus";
     private static final Logger LOGGER = LogManager.getLogger();
     private UUID currentFireballUUID = null;
+
+    public IgnisFireball(){
+        this.spellName = "Fireball";
+        this.spellElement = "Ignis";
+        this.spellSchool = "Interitus";
+    }
 
 
     @Override

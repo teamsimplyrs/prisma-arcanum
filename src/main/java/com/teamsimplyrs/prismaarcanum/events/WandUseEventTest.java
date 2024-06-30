@@ -39,7 +39,7 @@ public class WandUseEventTest {
     @SubscribeEvent
     public static void wandUseStart(LivingEntityUseItemEvent.Start event)
     {
-
+        LOGGER.info(PASpellRegistry.IGNIS_FIREBALL.get().spellName);
     }
 
     @SubscribeEvent

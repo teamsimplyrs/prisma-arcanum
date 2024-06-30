@@ -14,31 +14,32 @@ import java.util.List;
 
 public class SpellData implements Comparable<SpellData>{
     private final SpellBase SPELL;
-    public static final String PA_SPELL = "PA_spell";
-    public static final String NAME = "spell_name";
-    public static final String ELEMENT = "spell_element";
-    public static final String SCHOOL = "spell_school";
-    public static final String TIER = "spell_tier";
+    public static String PA_SPELL = "PA_spell";
+    public static String NAME = "spell_name";
+    public static String ELEMENT = "spell_element";
+    public static String SCHOOL = "spell_school";
+    public static String TIER = "spell_tier";
     public List<SpellBase> listEvolutions = new ArrayList<>(3);
     private MutableComponent displayName;
 
-    public static final SpellData NULL_SPELL = new SpellData(PASpellRegistry.getSpell("null"));
+    //public static final SpellData NULL_SPELL = new SpellData(PASpellRegistry.PA_SPELL_REGISTRY_SUPPLIER.get().getValue(ResourceLocation.tryParse("null_spell")));
 
 
     public SpellData(SpellBase spell)
     {
         this.SPELL = spell;
+        this.NAME = spell.spellName;
     }
 
-    public static SpellData getSpellData(ItemStack itemStack)
-    {
-        CompoundTag tag = itemStack.getTagElement(PA_SPELL);
-
-        // If provided ItemStack has spell NBT, return Spell using SpellName- else return Null Spell;
-        return tag != null ?
-                new SpellData(PASpellRegistry.getSpell(tag.getString(NAME))) :
-                NULL_SPELL;
-    }
+//    public static SpellData getSpellData(ItemStack itemStack)
+//    {
+//        CompoundTag tag = itemStack.getTagElement(PA_SPELL);
+//
+//        // If provided ItemStack has spell NBT, return Spell using SpellName- else return Null Spell;
+//        return tag != null ?
+//                new SpellData(PASpellRegistry.getSpell(tag.getString(NAME))) :
+//                NULL_SPELL;
+//    }
 
     public static void setSpellData(ItemStack itemStack, SpellBase spell)
     {

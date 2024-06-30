@@ -1,6 +1,9 @@
 package com.teamsimplyrs.prismaarcanum.registry;
 
 import com.teamsimplyrs.prismaarcanum.PrismaArcanum;
+import com.teamsimplyrs.prismaarcanum.capability.spell.SpellData;
+import com.teamsimplyrs.prismaarcanum.item.spells.SpellBase;
+import com.teamsimplyrs.prismaarcanum.item.spells.spellholograms.IgnisSpellHologram;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -8,9 +11,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Collection;
 
 public class PACreativeTabsRegistry {
-
+    private static final Logger LOGGER = LogManager.getLogger();
     public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, PrismaArcanum.MODID);
 
     public static final RegistryObject<CreativeModeTab> PA_CREATIVE_TAB =
@@ -32,14 +39,19 @@ public class PACreativeTabsRegistry {
                         output.accept(PABlockRegistry.SPELL_NEXUS.get());
 
                         output.accept(PAItemRegistry.IGNIS_SPELL_HOLOGRAM.get());
-                        output.accept(PAItemRegistry.AQUA_SPELL_HOLOGRAM.get());
-                        output.accept(PAItemRegistry.TERRA_SPELL_HOLOGRAM.get());
-                        output.accept(PAItemRegistry.FULGUR_SPELL_HOLOGRAM.get());
-                        output.accept(PAItemRegistry.GELUM_SPELL_HOLOGRAM.get());
-                        output.accept(PAItemRegistry.VENTUS_SPELL_HOLOGRAM.get());
-                        output.accept(PAItemRegistry.NATURA_SPELL_HOLOGRAM.get());
-                        output.accept(PAItemRegistry.LUX_SPELL_HOLOGRAM.get());
-                        output.accept(PAItemRegistry.NOX_SPELL_HOLOGRAM.get());
+//                        output.accept(PAItemRegistry.AQUA_SPELL_HOLOGRAM.get());
+//                        output.accept(PAItemRegistry.TERRA_SPELL_HOLOGRAM.get());
+//                        output.accept(PAItemRegistry.FULGUR_SPELL_HOLOGRAM.get());
+//                        output.accept(PAItemRegistry.GELUM_SPELL_HOLOGRAM.get());
+//                        output.accept(PAItemRegistry.VENTUS_SPELL_HOLOGRAM.get());
+//                        output.accept(PAItemRegistry.NATURA_SPELL_HOLOGRAM.get());
+//                        output.accept(PAItemRegistry.LUX_SPELL_HOLOGRAM.get());
+//                        output.accept(PAItemRegistry.NOX_SPELL_HOLOGRAM.get());
+
+                        generateSpellHolograms(output, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
+
+
                     })
                     .build());
 
@@ -48,6 +60,23 @@ public class PACreativeTabsRegistry {
     public static void register(IEventBus eventBus)
     {
         CREATIVE_TABS.register(eventBus);
+    }
+
+    private static void generateSpellHolograms(CreativeModeTab.Output pOutput,CreativeModeTab.TabVisibility pTabVisibility) {
+       LOGGER.info("spell hologram generator called");
+       Collection<RegistryObject<SpellBase>> i = PASpellRegistry.PA_SPELL.getEntries();
+        for(RegistryObject<SpellBase> spell: i){
+            if(spell.get().spellElement=="Ignis"){
+                pOutput.accept(IgnisSpellHologram.create(new SpellData(spell.get())));
+            }
+            LOGGER.info(spell.getKey());
+        }
+//        pSpells.listElements().map(Holder::value).forEach((spellBase -> {
+//           LOGGER.info("LOGGER FOR SPELL GENERATION");
+//           LOGGER.info(spellBase.spellElement);
+//       }));
+
+
     }
 
 }
