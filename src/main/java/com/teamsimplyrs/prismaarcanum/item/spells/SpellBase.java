@@ -8,6 +8,7 @@ import net.minecraft.world.level.Level;
 public abstract class SpellBase {
 
     public String spellName, spellElement, spellSchool, spellTier;
+    public int spellElementID;
     public SpellBase SpellEvo;
     public SpellBase SpellEvolvesFrom;
 

@@ -2,7 +2,7 @@ package com.teamsimplyrs.prismaarcanum.screen;
 
 import com.mojang.logging.LogUtils;
 import com.teamsimplyrs.prismaarcanum.block.entity.SpellNexusBlockEntity;
-import com.teamsimplyrs.prismaarcanum.item.spells.spellholograms.AbstractSpellHologram;
+import com.teamsimplyrs.prismaarcanum.item.spells.spellholograms.SpellHologram;
 import com.teamsimplyrs.prismaarcanum.screen.slot.SpellHologramSlot;
 import com.teamsimplyrs.prismaarcanum.screen.slot.WandSlot;
 import net.minecraft.network.FriendlyByteBuf;
@@ -82,7 +82,7 @@ public class SpellNexusMenu extends AbstractContainerMenu {
         }
         else if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into the tile inventory
-            if((this.slots.get(pIndex).getItem().getItem() instanceof AbstractSpellHologram && !this.slots.get(0).hasItem())){
+            if((this.slots.get(pIndex).getItem().getItem() instanceof SpellHologram && !this.slots.get(0).hasItem())){
                 return ItemStack.EMPTY;
             }
             if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX

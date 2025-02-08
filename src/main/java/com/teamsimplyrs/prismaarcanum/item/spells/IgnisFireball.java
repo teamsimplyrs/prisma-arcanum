@@ -1,4 +1,4 @@
-package com.teamsimplyrs.prismaarcanum.item.spells.interitus;
+package com.teamsimplyrs.prismaarcanum.item.spells;
 
 import com.teamsimplyrs.prismaarcanum.entity.projectile.FireballProjectile;
 import com.teamsimplyrs.prismaarcanum.item.spells.SpellProjectile;
@@ -23,7 +23,9 @@ public class IgnisFireball extends SpellProjectile {
     public IgnisFireball(){
         this.spellName = "Fireball";
         this.spellElement = "Ignis";
+        this.spellElementID = 1;
         this.spellSchool = "Interitus";
+        this.spellTier = "Basic";
     }
 
 
@@ -43,7 +45,30 @@ public class IgnisFireball extends SpellProjectile {
 
     @Override
     public void chargeSpell(Player pPlayer) {
+
         Vec3 lookVector = pPlayer.getLookAngle();
+
+        Level level = pPlayer.level();
+        if(!level.isClientSide()){
+            ServerLevel serverLevel = (ServerLevel)level;
+            if(currentFireballUUID==null){
+                FireballProjectile fireballProjectile = new FireballProjectile(pPlayer, serverLevel);
+                fireballProjectile.setPos(pPlayer.getEyePosition().add(lookVector.multiply(2f, 2f, 2f)));
+                fireballProjectile.setNoGravity(true);
+                serverLevel.addFreshEntity(fireballProjectile);
+                currentFireballUUID = fireballProjectile.getUUID();
+//                fireballProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0f, 0.6F, 1F);
+            }
+            else{
+                Entity entity = serverLevel.getEntity(currentFireballUUID);
+                if(entity==null){
+                    currentFireballUUID = null;
+                }
+                else if(entity.getDeltaMovement().equals(Vec3.ZERO)){
+                    entity.setPos(pPlayer.getEyePosition().add(lookVector.multiply(2f, 2f, 2f)));
+                }
+            }
+        }
 
         // Calculate the up vector based on the pitch angle
         float pitch = pPlayer.getXRot();
@@ -74,27 +99,7 @@ public class IgnisFireball extends SpellProjectile {
             pPlayer.level().addParticle(new IgnisParticleOptions(spawnLocation, 10), x, y, z, velocityX, velocityY, velocityZ);
         }
 
-        Level level = pPlayer.level();
-        if(!level.isClientSide()){
-            ServerLevel serverLevel = (ServerLevel)level;
-            if(currentFireballUUID==null){
-                FireballProjectile fireballProjectile = new FireballProjectile(pPlayer, serverLevel);
-                fireballProjectile.setPos(pPlayer.getEyePosition().add(lookVector.multiply(2f, 2f, 2f)));
-                fireballProjectile.setNoGravity(true);
-                serverLevel.addFreshEntity(fireballProjectile);
-                currentFireballUUID = fireballProjectile.getUUID();
-//                fireballProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0f, 0.6F, 1F);
-            }
-            else{
-                Entity entity = serverLevel.getEntity(currentFireballUUID);
-                if(entity==null){
-                    currentFireballUUID = null;
-                }
-                else if(entity.getDeltaMovement().equals(Vec3.ZERO)){
-                    entity.setPos(pPlayer.getEyePosition().add(lookVector.multiply(2f, 2f, 2f)));
-                }
-            }
-        }
+
     }
 
     @Override

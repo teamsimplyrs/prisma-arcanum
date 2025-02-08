@@ -1,7 +1,7 @@
 package com.teamsimplyrs.prismaarcanum.screen.slot;
 
 import com.mojang.logging.LogUtils;
-import com.teamsimplyrs.prismaarcanum.item.spells.spellholograms.AbstractSpellHologram;
+import com.teamsimplyrs.prismaarcanum.item.spells.spellholograms.SpellHologram;
 import com.teamsimplyrs.prismaarcanum.item.wands.AbstractWand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
@@ -17,7 +17,7 @@ public class SpellHologramSlot extends SlotItemHandler {
 
     @Override
     public boolean mayPlace(ItemStack stack) {
-        return (stack.getItem() instanceof AbstractSpellHologram);
+        return (stack.getItem() instanceof SpellHologram);
     }
 
     @Override

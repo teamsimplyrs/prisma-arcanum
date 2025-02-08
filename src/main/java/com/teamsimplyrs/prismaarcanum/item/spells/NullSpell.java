@@ -6,6 +6,14 @@ import net.minecraft.world.level.Level;
 
 public class NullSpell extends SpellBase {
 
+    public NullSpell(){
+        this.spellName = "Null";
+        this.spellElement = "Null";
+        this.spellElementID = 0;
+        this.spellSchool = "Null";
+        this.spellTier = "Null";
+    }
+
 
     @Override
     public void spellCast(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {

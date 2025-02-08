@@ -1,9 +1,8 @@
 package com.teamsimplyrs.prismaarcanum.registry;
 
 import com.teamsimplyrs.prismaarcanum.PrismaArcanum;
-import com.teamsimplyrs.prismaarcanum.capability.spell.SpellData;
 import com.teamsimplyrs.prismaarcanum.item.spells.SpellBase;
-import com.teamsimplyrs.prismaarcanum.item.spells.spellholograms.IgnisSpellHologram;
+import com.teamsimplyrs.prismaarcanum.item.spells.spellholograms.SpellHologram;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -38,15 +37,7 @@ public class PACreativeTabsRegistry {
                         output.accept((PAItemRegistry.NOX_WAND.get()));
                         output.accept(PABlockRegistry.SPELL_NEXUS.get());
 
-                        output.accept(PAItemRegistry.IGNIS_SPELL_HOLOGRAM.get());
-//                        output.accept(PAItemRegistry.AQUA_SPELL_HOLOGRAM.get());
-//                        output.accept(PAItemRegistry.TERRA_SPELL_HOLOGRAM.get());
-//                        output.accept(PAItemRegistry.FULGUR_SPELL_HOLOGRAM.get());
-//                        output.accept(PAItemRegistry.GELUM_SPELL_HOLOGRAM.get());
-//                        output.accept(PAItemRegistry.VENTUS_SPELL_HOLOGRAM.get());
-//                        output.accept(PAItemRegistry.NATURA_SPELL_HOLOGRAM.get());
-//                        output.accept(PAItemRegistry.LUX_SPELL_HOLOGRAM.get());
-//                        output.accept(PAItemRegistry.NOX_SPELL_HOLOGRAM.get());
+                        output.accept(PAItemRegistry.SPELL_HOLOGRAM.get());
 
                         generateSpellHolograms(output, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 
@@ -66,9 +57,8 @@ public class PACreativeTabsRegistry {
        LOGGER.info("spell hologram generator called");
        Collection<RegistryObject<SpellBase>> i = PASpellRegistry.PA_SPELL.getEntries();
         for(RegistryObject<SpellBase> spell: i){
-            if(spell.get().spellElement=="Ignis"){
-                pOutput.accept(IgnisSpellHologram.create(new SpellData(spell.get())));
-            }
+            ItemStack item = SpellHologram.createSpellHologram(spell.get());
+            pOutput.accept(item);
             LOGGER.info(spell.getKey());
         }
 //        pSpells.listElements().map(Holder::value).forEach((spellBase -> {

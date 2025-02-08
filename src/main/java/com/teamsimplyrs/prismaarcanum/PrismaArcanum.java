@@ -9,6 +9,8 @@ import com.teamsimplyrs.prismaarcanum.screen.PAMenuTypes;
 import com.teamsimplyrs.prismaarcanum.screen.SpellNexusScreen;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -24,7 +26,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
-import static com.teamsimplyrs.prismaarcanum.registry.PAItemRegistry.initSpellHolograms;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(PrismaArcanum.MODID)
@@ -68,12 +69,6 @@ public class PrismaArcanum
     // Add the teamsimplyrs block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
-        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS)
-        {
-            event.accept(PAItemRegistry.RAW_IGNIS);
-            event.accept(PAItemRegistry.IGNIS_WAND);
-        }
-        initSpellHolograms();
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -92,6 +87,20 @@ public class PrismaArcanum
         {
             MenuScreens.register(PAMenuTypes.SPELL_NEXUS_MENU.get(), SpellNexusScreen::new);
             EntityRenderers.register(PAEntities.FIREBALL_PROJECTILE.get(), FireballProjectileRenderer::new);
+
+            registerItemProperties();
+        }
+
+        public static void registerItemProperties()
+        {
+            ItemProperties.register(PAItemRegistry.SPELL_HOLOGRAM.get(),
+                    new ResourceLocation("spell_element_id"),
+                    (stack, world, entity, seed) -> {
+                        if (stack.hasTag() && stack.getTag().contains("spell_element_id")) {
+                            return stack.getTag().getInt("spell_element_id");
+                        }
+                        return 0.0f; // Default texture if no tag
+                    });
         }
     }
 }

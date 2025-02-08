@@ -1,0 +1,62 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "prismaarcanum:item/empty_spell_hologram"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "spell_element_id": 1
+      },
+      "model": "prismaarcanum:item/ignis_spell_hologram"
+    },
+    {
+      "predicate": {
+        "spell_element_id": 2
+      },
+      "model": "prismaarcanum:item/aqua_spell_hologram"
+    },
+    {
+      "predicate": {
+        "spell_element_id": 3
+      },
+      "model": "prismaarcanum:item/gelum_spell_hologram"
+    },
+    {
+      "predicate": {
+        "spell_element_id": 4
+      },
+      "model": "prismaarcanum:item/fulgur_spell_hologram"
+    },
+    {
+      "predicate": {
+        "spell_element_id": 5
+      },
+      "model": "prismaarcanum:item/terra_spell_hologram"
+    },
+    {
+      "predicate": {
+        "spell_element_id": 6
+      },
+      "model": "prismaarcanum:item/ventus_spell_hologram"
+    },
+    {
+      "predicate": {
+        "spell_element_id": 7
+      },
+      "model": "prismaarcanum:item/natura_spell_hologram"
+    },
+    {
+      "predicate": {
+        "spell_element_id": 8
+      },
+      "model": "prismaarcanum:item/lux_spell_hologram"
+    },
+    {
+      "predicate": {
+        "spell_element_id": 9
+      },
+      "model": "prismaarcanum:item/nox_spell_hologram"
+    }
+  ]
+}

@@ -2,7 +2,7 @@ package com.teamsimplyrs.prismaarcanum.item.wands;
 
 import com.teamsimplyrs.prismaarcanum.item.interfaces.ICastingItem;
 import com.teamsimplyrs.prismaarcanum.item.spells.SpellBase;
-import com.teamsimplyrs.prismaarcanum.item.spells.interitus.IgnisFireball;
+import com.teamsimplyrs.prismaarcanum.item.spells.IgnisFireball;
 import com.teamsimplyrs.prismaarcanum.registry.PASpellRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.stats.Stats;
