@@ -1,7 +1,6 @@
 package com.teamsimplyrs.prismaarcanum.item.spells;
 
 import com.teamsimplyrs.prismaarcanum.entity.projectile.FireballProjectile;
-import com.teamsimplyrs.prismaarcanum.item.spells.SpellProjectile;
 import com.teamsimplyrs.prismaarcanum.particle.particleOptions.IgnisParticleOptions;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
@@ -45,20 +44,28 @@ public class IgnisFireball extends SpellProjectile {
 
     @Override
     public void chargeSpell(Player pPlayer) {
-
         Vec3 lookVector = pPlayer.getLookAngle();
 
+        chargeFireball(pPlayer, lookVector);
+        createFireballParticles(pPlayer, lookVector);
+    }
+
+    private void chargeFireball(Player pPlayer, Vec3 lookVector) {
         Level level = pPlayer.level();
+
         if(!level.isClientSide()){
             ServerLevel serverLevel = (ServerLevel)level;
+
             if(currentFireballUUID==null){
                 FireballProjectile fireballProjectile = new FireballProjectile(pPlayer, serverLevel);
                 fireballProjectile.setPos(pPlayer.getEyePosition().add(lookVector.multiply(2f, 2f, 2f)));
                 fireballProjectile.setNoGravity(true);
+
                 serverLevel.addFreshEntity(fireballProjectile);
                 currentFireballUUID = fireballProjectile.getUUID();
 //                fireballProjectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0f, 0.6F, 1F);
             }
+
             else{
                 Entity entity = serverLevel.getEntity(currentFireballUUID);
                 if(entity==null){
@@ -69,7 +76,10 @@ public class IgnisFireball extends SpellProjectile {
                 }
             }
         }
+    }
 
+    private void createFireballParticles(Player pPlayer, Vec3 lookVector)
+    {
         // Calculate the up vector based on the pitch angle
         float pitch = pPlayer.getXRot();
         double pitchRadians = Math.toRadians(pitch);
@@ -98,8 +108,6 @@ public class IgnisFireball extends SpellProjectile {
 
             pPlayer.level().addParticle(new IgnisParticleOptions(spawnLocation, 10), x, y, z, velocityX, velocityY, velocityZ);
         }
-
-
     }
 
     @Override
