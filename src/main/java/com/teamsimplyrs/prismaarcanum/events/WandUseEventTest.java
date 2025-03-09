@@ -2,6 +2,7 @@ package com.teamsimplyrs.prismaarcanum.events;
 
 import com.teamsimplyrs.prismaarcanum.PrismaArcanum;
 import com.teamsimplyrs.prismaarcanum.item.spells.SpellBase;
+import com.teamsimplyrs.prismaarcanum.item.spells.vecto.AquaDashSpell;
 import com.teamsimplyrs.prismaarcanum.item.wands.AbstractWand;
 import com.teamsimplyrs.prismaarcanum.item.wands.IgnisWand;
 import com.teamsimplyrs.prismaarcanum.registry.PASpellRegistry;
@@ -46,5 +47,10 @@ public class WandUseEventTest {
     public static void wandUseStop(LivingEntityUseItemEvent.Stop event)
     {
 
+    }
+
+    @SubscribeEvent
+    public static void onClientTick(TickEvent.ClientTickEvent event) {
+        AquaDashSpell.AquaDashHandler.tick();
     }
 }
