@@ -53,22 +53,22 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
 
     @Override
     public SpellBase getNextSpell(ItemStack stack) {
-        return listSpellsIgnis.get((spellIndex+1)%listSpellsIgnis.size());
+        return listSpellsIgnis.get((spellIndex+1) % listSpellsIgnis.size());
     }
 
     @Override
     public SpellBase getPreviousSpell(ItemStack stack) {
-        return listSpellsIgnis.get((spellIndex-1)%listSpellsIgnis.size());
+        return listSpellsIgnis.get((spellIndex-1) % listSpellsIgnis.size());
     }
 
     @Override
     public void selectNextSpell(ItemStack stack) {
-        spellIndex = (spellIndex+1)%listSpellsIgnis.size();
+        spellIndex = (spellIndex+1) % listSpellsIgnis.size();
     }
 
     @Override
     public void selectPreviousSpell(ItemStack stack) {
-
+        spellIndex = (spellIndex-1) % listSpellsIgnis.size();
     }
 
     @Override
@@ -108,8 +108,6 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
         {
             BlockPos posClicked = pContext.getClickedPos();
             Player player = pContext.getPlayer();
-
-            spawnIgnisParticles(pContext, posClicked);
         }
         return super.useOn(pContext);
     }
@@ -132,17 +130,4 @@ public class IgnisWand extends AbstractWand implements ICastingItem {
         return 75000;
     }
 
-    private void spawnIgnisParticles(UseOnContext pContext, BlockPos posClicked)
-    {
-        for (int i = 0; i < 360; i++)
-        {
-            if (i%20 == 0)
-            {
-//                pContext.getLevel().addParticle(PAParticles.IGNIS_PARTICLES.get(),
-//                        posClicked.getX() + 0.5f, posClicked.getY() + 1, posClicked.getZ() + 0.5f,
-//                        Math.cos(i) + 0.25f, 0.15f, Math.sin(i)*0.25f
-//                        );
-            }
-        }
-    }
 }
