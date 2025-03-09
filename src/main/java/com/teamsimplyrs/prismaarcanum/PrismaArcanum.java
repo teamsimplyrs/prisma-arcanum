@@ -7,7 +7,9 @@ import com.teamsimplyrs.prismaarcanum.particle.PAParticles;
 import com.teamsimplyrs.prismaarcanum.registry.*;
 import com.teamsimplyrs.prismaarcanum.screen.PAMenuTypes;
 import com.teamsimplyrs.prismaarcanum.screen.SpellNexusScreen;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.renderer.ShaderInstance;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;
@@ -82,6 +84,7 @@ public class PrismaArcanum
     @Mod.EventBusSubscriber(modid = MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
+        public static ShaderInstance waterAuraShader;
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
@@ -89,6 +92,7 @@ public class PrismaArcanum
             EntityRenderers.register(PAEntities.FIREBALL_PROJECTILE.get(), FireballProjectileRenderer::new);
 
             registerItemProperties();
+            registerShaders();
         }
 
         public static void registerItemProperties()
@@ -101,6 +105,11 @@ public class PrismaArcanum
                         }
                         return 0.0f; // Default texture if no tag
                     });
+        }
+
+        public static void registerShaders()
+        {
+            
         }
     }
 }

@@ -1,0 +1,12 @@
+{
+  "vertex": "prismaarcanum:water_aura",
+  "fragment": "prismaarcanum:water_aura",
+  "attributes": [
+    "Position"
+  ],
+  "samplers": [
+    {
+      "name": "DiffuseSampler"
+    }
+  ]
+}

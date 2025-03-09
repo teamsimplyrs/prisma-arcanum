@@ -1,0 +1,14 @@
+{
+  "targets": [
+    "main"
+  ],
+  "passes": [
+    {
+      "name": "prismaarcanum:water_aura",
+      "intarget": "main",
+      "outtarget": "main",
+      "program": "prismaarcanum:water_aura",
+      "auxtargets": []
+    }
+  ]
+}
